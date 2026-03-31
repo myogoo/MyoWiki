@@ -1,0 +1,19 @@
+---
+import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
+import MobileMenuFooter from './MobileMenuFooter.astro';
+import VersionSelect from './VersionSelect.astro';
+import { getScopedSidebar } from '../../config/projects.mjs';
+
+const base = import.meta.env.BASE_URL ?? '/';
+const sidebar = getScopedSidebar(Astro.locals.starlightRoute.sidebar, Astro.url.pathname, base);
+---
+
+<div class="sidebar-version">
+  <VersionSelect />
+</div>
+
+<SidebarSublist sublist={sidebar} />
+
+<div class="md:sl-hidden">
+  <MobileMenuFooter />
+</div>

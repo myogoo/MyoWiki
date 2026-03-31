@@ -1,0 +1,22 @@
+---
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+import VersionSelect from './VersionSelect.astro';
+---
+
+<div class="mobile-preferences sl-flex">
+  <VersionSelect />
+  <ThemeSelect />
+</div>
+
+<style>
+  @layer starlight.core {
+    .mobile-preferences {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--sl-color-gray-6);
+      column-gap: 0.9rem;
+      row-gap: 0.5rem;
+      padding: 0.75rem 0 0.25rem;
+    }
+  }
+</style>

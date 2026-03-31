@@ -1,0 +1,265 @@
+---
+import {
+  PROJECTS,
+  buildProjectHref,
+  buildVersionHref,
+  getDefaultVersion,
+} from '../../config/projects.mjs';
+
+const base = import.meta.env.BASE_URL ?? '/';
+
+const projectCards = PROJECTS.map((project) => {
+  const latestVersion = getDefaultVersion(project);
+  const latestHref = latestVersion
+    ? buildProjectHref(base, project.slug, latestVersion.slug)
+    : '#';
+  const startHref =
+    latestVersion && project.sidebarDirectories?.includes('getting-started')
+      ? buildVersionHref(base, project.slug, latestVersion.slug, ['getting-started', 'overview'])
+      : latestHref;
+
+  return {
+    ...project,
+    latestVersion,
+    latestHref,
+    startHref,
+    versions: project.versions.map((version) => ({
+      ...version,
+      href: buildProjectHref(base, project.slug, version.slug),
+    })),
+  };
+});
+---
+
+<section id="available-wikis" class="home-directory">
+  <div class="home-directory__intro">
+    <p class="home-directory__eyebrow">Available wikis</p>
+    <h2>Two projects, three live docs lines</h2>
+    <p class="home-directory__lead">Open the project you need, then jump into the latest version or a specific line.</p>
+  </div>
+
+  <div class="home-directory__grid">
+    {
+      projectCards.map((project) => (
+        <article class="home-card">
+          <div class="home-card__header">
+            <h3>{project.label}</h3>
+            {project.latestVersion && <a class="home-card__latest" href={project.latestHref}>Latest {project.latestVersion.label}</a>}
+          </div>
+
+          <p class="home-card__description">{project.description}</p>
+
+          <ul class="home-card__versions">
+            {project.versions.map((version) => (
+              <li>
+                <a class:list={['home-card__version', { 'is-latest': version.latest }]} href={version.href}>
+                  <strong>{version.label}</strong>
+                  <span>{version.channel}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div class="home-card__actions">
+            <a class="home-card__action home-card__action--primary" href={project.startHref}>
+              Start Here
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .home-directory {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  .home-directory__intro,
+  .home-card {
+    border: 1px solid var(--sl-color-hairline-shade);
+    border-radius: 1rem;
+    background: linear-gradient(180deg, hsla(198, 38%, 14%, 0.72), hsla(212, 34%, 10%, 0.8));
+  }
+
+  :global(html[data-theme='light']) .home-directory__intro,
+  :global(html[data-theme='light']) .home-card {
+    background: linear-gradient(180deg, hsla(0, 0%, 100%, 0.92), hsla(190, 34%, 96%, 0.96));
+  }
+
+  .home-directory__intro {
+    padding: 1.2rem 1.3rem;
+  }
+
+  .home-directory__eyebrow {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sl-color-accent);
+  }
+
+  .home-directory__intro h2 {
+    margin: 0.35rem 0 0.5rem;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .home-directory__lead {
+    margin: 0;
+    color: var(--sl-color-gray-2);
+  }
+
+  .home-directory__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .home-card {
+    padding: 1.2rem 1.25rem;
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .home-card__header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .home-card__header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+
+  .home-card__latest {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 4.5rem;
+    padding: 0.45rem 0.75rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--sl-color-black);
+    background: linear-gradient(135deg, hsl(191, 100%, 64%), hsl(168, 100%, 70%));
+  }
+
+  .home-card__description {
+    margin: 0;
+    color: var(--sl-color-gray-2);
+  }
+
+  .home-card__versions {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .home-card__version {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.58rem 0.75rem;
+    border-radius: 0.8rem;
+    text-decoration: none;
+    border: 1px solid hsla(191, 44%, 66%, 0.14);
+    background: hsla(215, 20%, 100%, 0.03);
+    color: var(--sl-color-white);
+  }
+
+  .home-card__version strong {
+    font-size: 0.92rem;
+  }
+
+  .home-card__version span {
+    color: var(--sl-color-gray-3);
+    font-size: 0.8rem;
+  }
+
+  .home-card__version.is-latest {
+    border-color: hsla(191, 100%, 64%, 0.28);
+    background: hsla(191, 100%, 64%, 0.09);
+  }
+
+  :global(html[data-theme='light']) .home-card__version {
+    color: var(--sl-color-gray-1);
+    background: hsla(0, 0%, 100%, 0.72);
+    border-color: hsla(194, 25%, 36%, 0.12);
+  }
+
+  :global(html[data-theme='light']) .home-card__version.is-latest {
+    background: hsla(194, 84%, 41%, 0.08);
+    border-color: hsla(194, 76%, 39%, 0.22);
+  }
+
+  .home-card__actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .home-card__action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.62rem 0.9rem;
+    border-radius: 0.85rem;
+    border: 1px solid var(--sl-color-hairline-shade);
+    color: var(--sl-color-white);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .home-card__action--primary {
+    color: var(--sl-color-black);
+    border-color: transparent;
+    background: linear-gradient(135deg, hsl(191, 100%, 64%), hsl(168, 100%, 70%));
+  }
+
+  :global(html[data-theme='light']) .home-card__action {
+    color: var(--sl-color-gray-1);
+    background: hsla(0, 0%, 100%, 0.82);
+  }
+
+  :global(html[data-theme='light']) .home-card__action--primary {
+    color: var(--sl-color-text-invert);
+    background: linear-gradient(135deg, hsl(194, 80%, 38%), hsl(178, 78%, 38%));
+  }
+
+  @media (max-width: 60rem) {
+    .home-directory__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 42rem) {
+    .home-card__header { display: grid; }
+
+    .home-card__latest {
+      justify-self: start;
+    }
+
+    .home-card__version {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .home-card__actions {
+      flex-direction: column;
+    }
+
+    .home-card__action {
+      width: 100%;
+    }
+  }
+</style>

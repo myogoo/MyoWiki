@@ -1,0 +1,51 @@
+---
+import {
+  getDefaultVersion,
+  getRouteContext,
+} from '../../config/projects.mjs';
+
+const base = import.meta.env.BASE_URL ?? '/';
+const routeContext = getRouteContext(Astro.url.pathname, base);
+const project = routeContext.project;
+const version = routeContext.version ?? (project ? getDefaultVersion(project) : undefined);
+---
+
+<div class="site-title-shell">
+  <a href={base} class="site-title site-title-home">
+    <span translate="no">MyoWiki</span>
+  </a>
+  {project && version && <span class="site-title-context" translate="no">{project.label} · {version.label}</span>}
+</div>
+
+<style>
+  @layer starlight.core {
+    .site-title-shell {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-width: 0;
+    }
+
+    .site-title {
+      align-items: center;
+      display: inline-flex;
+      font-size: var(--sl-text-h4);
+      font-weight: 700;
+      min-width: 0;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .site-title-home {
+      color: var(--sl-color-text-accent);
+    }
+
+    .site-title-context {
+      color: var(--sl-color-gray-3);
+      font-size: var(--sl-text-sm);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+  }
+</style>

@@ -1,0 +1,71 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="88" y1="56" x2="434" y2="456" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0F2331"/>
+      <stop offset="1" stop-color="#1F3D54"/>
+    </linearGradient>
+    <linearGradient id="crystalMain" x1="256" y1="86" x2="256" y2="352" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E9FDFF"/>
+      <stop offset="0.45" stop-color="#86DCF0"/>
+      <stop offset="1" stop-color="#4EA6D1"/>
+    </linearGradient>
+    <linearGradient id="crystalShade" x1="160" y1="178" x2="292" y2="316" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6FC7E2"/>
+      <stop offset="1" stop-color="#2E6F98"/>
+    </linearGradient>
+    <linearGradient id="petal" x1="256" y1="296" x2="256" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#C7F7FF"/>
+      <stop offset="1" stop-color="#4D8FBC"/>
+    </linearGradient>
+    <linearGradient id="petalShade" x1="256" y1="320" x2="256" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7FC7DE"/>
+      <stop offset="1" stop-color="#244A6E"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(256 248) rotate(90) scale(176)">
+      <stop offset="0" stop-color="#A2F4FF" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#A2F4FF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softShadow" x="58" y="40" width="396" height="418" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#07121B" flood-opacity="0.34"/>
+    </filter>
+  </defs>
+
+  <rect x="64" y="64" width="384" height="384" rx="96" fill="url(#bg)"/>
+  <circle cx="256" cy="248" r="172" fill="url(#glow)"/>
+
+  <g filter="url(#softShadow)">
+    <path d="M170 338C149 320 122 315 96 322C122 292 156 284 184 295C203 303 218 317 227 338C207 349 184 351 170 338Z" fill="url(#petalShade)"/>
+    <path d="M342 338C363 320 390 315 416 322C390 292 356 284 328 295C309 303 294 317 285 338C305 349 328 351 342 338Z" fill="url(#petalShade)"/>
+    <path d="M147 370C139 344 146 319 168 304C193 287 226 288 244 311C229 349 194 378 147 370Z" fill="url(#petal)"/>
+    <path d="M365 370C373 344 366 319 344 304C319 287 286 288 268 311C283 349 318 378 365 370Z" fill="url(#petal)"/>
+    <path d="M192 404C179 382 181 354 197 337C215 317 241 314 256 328C271 314 297 317 315 337C331 354 333 382 320 404C296 404 273 394 256 378C239 394 216 404 192 404Z" fill="url(#petalShade)"/>
+    <path d="M110 348C142 332 174 337 196 358C176 374 145 381 118 372C108 369 100 362 96 353C100 351 105 349 110 348Z" fill="#9AEAFF" fill-opacity="0.34"/>
+    <path d="M402 348C370 332 338 337 316 358C336 374 367 381 394 372C404 369 412 362 416 353C412 351 407 349 402 348Z" fill="#9AEAFF" fill-opacity="0.34"/>
+
+    <path d="M256 86L298 144L330 126L366 194L382 228L352 304L294 374L256 394L218 374L160 304L130 228L146 194L182 126L214 144L256 86Z" fill="url(#crystalMain)"/>
+    <path d="M256 86L214 144L200 220L218 374L160 304L130 228L146 194L182 126L214 144L256 86Z" fill="url(#crystalShade)" fill-opacity="0.62"/>
+    <path d="M256 86L298 144L312 220L294 374L352 304L382 228L366 194L330 126L298 144L256 86Z" fill="#C6F9FF" fill-opacity="0.48"/>
+    <path d="M228 154L256 126L284 154L270 266L256 310L242 266L228 154Z" fill="#DDFDFF" fill-opacity="0.82"/>
+    <path d="M181 126L152 98L141 158L182 126H181Z" fill="url(#crystalShade)"/>
+    <path d="M331 126L360 98L371 158L330 126H331Z" fill="#8AD9F0"/>
+    <path d="M181 126L152 98L178 83L208 112L181 126Z" fill="#A0ECFF"/>
+    <path d="M331 126L360 98L334 83L304 112L331 126Z" fill="#D8FCFF"/>
+
+    <path d="M200 193L228 154L242 266L218 374L176 258L200 193Z" fill="#6EBEDB" fill-opacity="0.68"/>
+    <path d="M312 193L284 154L270 266L294 374L336 258L312 193Z" fill="#D8FBFF" fill-opacity="0.7"/>
+    <path d="M171 108L188 92L204 108" stroke="#E9FDFF" stroke-width="10" stroke-linecap="round"/>
+    <path d="M308 108L324 92L341 108" stroke="#E9FDFF" stroke-width="10" stroke-linecap="round"/>
+
+    <path d="M220 234L242 228" stroke="#19425E" stroke-width="10" stroke-linecap="round"/>
+    <path d="M292 228L270 234" stroke="#19425E" stroke-width="10" stroke-linecap="round"/>
+    <path d="M245 260C252 268 260 268 267 260" stroke="#19425E" stroke-width="10" stroke-linecap="round"/>
+    <path d="M231 278C242 286 255 289 268 288C281 287 292 283 301 276" stroke="#19425E" stroke-width="8" stroke-linecap="round" stroke-opacity="0.42"/>
+
+    <path d="M194 140L206 124L218 138" stroke="#F6FEFF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M318 138L330 124L342 140" stroke="#F6FEFF" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="184" cy="182" r="7" fill="#F1FFFF" fill-opacity="0.9"/>
+    <circle cx="328" cy="196" r="6" fill="#F1FFFF" fill-opacity="0.75"/>
+    <circle cx="152" cy="276" r="4" fill="#C4F7FF" fill-opacity="0.75"/>
+    <circle cx="348" cy="290" r="4" fill="#C4F7FF" fill-opacity="0.75"/>
+  </g>
+</svg>

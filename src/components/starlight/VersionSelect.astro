@@ -1,0 +1,130 @@
+---
+import {
+  buildVersionHref,
+  getRouteContext,
+} from '../../config/projects.mjs';
+
+const base = import.meta.env.BASE_URL ?? '/';
+const routeContext = getRouteContext(Astro.url.pathname, base);
+const { project, version, restSegments } = routeContext;
+
+const options = project
+  ? project.versions.map((item) => ({
+      value: buildVersionHref(base, project.slug, item.slug, restSegments),
+      selected: item.slug === version?.slug,
+      label: `${item.label} ${item.channel}`,
+    }))
+  : [];
+---
+
+{
+  project && options.length > 1 && (
+    <myowiki-version-select>
+      <label class="version-select">
+        <span class="sr-only">Select version</span>
+        <span class="version-prefix" aria-hidden="true">Version</span>
+        <select autocomplete="off">
+          {options.map(({ value, selected, label }) => <option value={value} selected={selected}>{label}</option>)}
+        </select>
+        <span class="version-caret" aria-hidden="true">▾</span>
+      </label>
+    </myowiki-version-select>
+  )
+}
+
+<script>
+  class MyowikiVersionSelect extends HTMLElement {
+    constructor() {
+      super();
+      const select = this.querySelector('select');
+
+      if (select) {
+        select.addEventListener('change', (event) => {
+          if (event.currentTarget instanceof HTMLSelectElement) {
+            window.location.pathname = event.currentTarget.value;
+          }
+        });
+
+        window.addEventListener('pageshow', (event) => {
+          if (!event.persisted) return;
+          const markupSelected = select.querySelector('option[selected]');
+          const markupSelectedIndex =
+            markupSelected instanceof HTMLOptionElement ? markupSelected.index : undefined;
+          if (markupSelectedIndex !== select.selectedIndex) {
+            select.selectedIndex = markupSelectedIndex ?? 0;
+          }
+        });
+      }
+    }
+  }
+
+  customElements.define('myowiki-version-select', MyowikiVersionSelect);
+</script>
+
+<style>
+  @layer starlight.core {
+    .version-select {
+      --sl-caret-size: 1.25rem;
+      --sl-inline-padding: 0.625rem;
+      --sl-select-width: 8.5rem;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--sl-color-gray-2);
+    }
+
+    .version-select:hover {
+      color: var(--sl-color-white);
+    }
+
+    .version-prefix,
+    .version-caret {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .version-prefix {
+      inset-inline-start: 0;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.78;
+    }
+
+    .version-select select {
+      border: 0;
+      padding-block: 0.625rem;
+      padding-inline:
+        calc(3.6rem + var(--sl-inline-padding))
+        calc(var(--sl-caret-size) + var(--sl-inline-padding) + 0.25rem);
+      margin-inline: calc(var(--sl-inline-padding) * -1);
+      width: calc(var(--sl-select-width) + var(--sl-inline-padding) * 2);
+      background-color: transparent;
+      color: inherit;
+      text-overflow: ellipsis;
+      cursor: pointer;
+      appearance: none;
+    }
+
+    .version-select option {
+      background-color: var(--sl-color-bg-nav);
+      color: var(--sl-color-gray-1);
+    }
+
+    .version-caret {
+      font-size: 0.95rem;
+      inset-inline-end: 0;
+      opacity: 0.82;
+    }
+
+    @media (min-width: 50rem) {
+      .version-select select {
+        font-size: var(--sl-text-sm);
+      }
+    }
+  }
+ </style>

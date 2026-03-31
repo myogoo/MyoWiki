@@ -1,0 +1,70 @@
+---
+slug: myotus/1.20.1/developers/terminal-upgrade-cards
+title: Terminal Upgrade Cards
+description: The 1.21.1 terminal upgrade card system, lifecycle hooks, and persistent storage behavior.
+sidebar:
+  order: 6
+---
+
+`ITerminalUpgradeCard` is a **1.21.1-only** API. It does not exist in the inspected `1.20.1` codebase.
+
+`1.20.1` does already inject terminal UI scaffolding through `MEStorageMenuMixin` and `MyoSlotSemantics`, including the floating side panel and placeholder upgrade slot semantics. What it does **not** ship is the card interface, card lifecycle callbacks, or persistent upgrade storage.
+
+## Purpose
+
+It marks items that can be inserted into terminal upgrade slots and receive lifecycle callbacks while installed in an AE2 terminal.
+
+## Lifecycle hooks
+
+```java
+public interface ITerminalUpgradeCard {
+    default void onTerminalOpen(MEStorageMenu menu, ItemStack stack) {}
+    default void onTerminalClose(MEStorageMenu menu, ItemStack stack) {}
+    default void onTerminalTick(MEStorageMenu menu, ItemStack stack) {}
+}
+```
+
+## Authoring expectations
+
+- upgrade cards should be non-stackable
+- callbacks are server-side terminal lifecycle hooks
+- only override the hooks your card actually needs
+
+## Example
+
+```java
+public class MyUpgradeCardItem extends Item implements ITerminalUpgradeCard {
+    @Override
+    public void onTerminalOpen(MEStorageMenu menu, ItemStack stack) {
+        // Apply one-time behavior when the terminal opens.
+    }
+
+    @Override
+    public void onTerminalTick(MEStorageMenu menu, ItemStack stack) {
+        // Run while the card is installed in an open terminal.
+    }
+}
+```
+
+## Persistent storage
+
+`PlayerUpgradeContainer` stores upgrade slot contents in player persistent data.
+
+Important details from the inspected implementation:
+
+- slot count is fixed at `5`
+- storage is keyed per terminal-specific storage key
+- legacy NBT keys are migrated when found
+- the old shared `terminal_upgrades` payload is migrated into the first terminal opened after the update
+
+See [Upgrade Storage](/myotus/1.20.1/developers/upgrade-storage/) for the full storage-key, migration, and menu-mixin flow.
+
+## Built-in example item
+
+The `1.21.1` tree contains a `DiamondUpgradeCardItem` test item. It is registered only outside production builds and grants a diamond when the terminal opens.
+
+That makes it a dev example, not a production-facing gameplay feature.
+
+## Related helpers
+
+The same codebase also provides `TerminalUpgradeHelper` so addon code can inspect installed cards without manually walking the slot list.

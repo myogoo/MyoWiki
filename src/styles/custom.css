@@ -1,0 +1,229 @@
+@import '@fontsource-variable/space-grotesk';
+@import '@fontsource/ibm-plex-mono';
+
+:root {
+  --sl-font: 'Space Grotesk Variable', 'Avenir Next', 'Segoe UI', sans-serif;
+  --sl-font-system: var(--sl-font);
+  --sl-font-mono: 'IBM Plex Mono', 'Fira Mono', monospace;
+  --sl-content-width: 52rem;
+  --sl-sidebar-width: 18.5rem;
+  --myo-panel-border: hsla(190, 40%, 72%, 0.14);
+}
+
+:root[data-theme='dark'] {
+  --sl-color-accent-low: hsl(191, 71%, 14%);
+  --sl-color-accent: hsl(191, 100%, 64%);
+  --sl-color-accent-high: hsl(188, 89%, 86%);
+  --sl-color-white: hsl(190, 24%, 96%);
+  --sl-color-gray-1: hsl(193, 18%, 90%);
+  --sl-color-gray-2: hsl(193, 12%, 76%);
+  --sl-color-gray-3: hsl(197, 12%, 58%);
+  --sl-color-gray-4: hsl(201, 16%, 41%);
+  --sl-color-gray-5: hsl(205, 24%, 24%);
+  --sl-color-gray-6: hsl(210, 34%, 11%);
+  --sl-color-black: hsl(210, 44%, 7%);
+  --sl-color-bg-nav: hsl(209, 40%, 9%);
+  --sl-color-bg-sidebar: hsl(209, 36%, 10%);
+  --sl-color-bg-inline-code: hsl(202, 31%, 14%);
+  --sl-color-hairline-shade: hsl(197, 32%, 21%);
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: hsl(188, 82%, 92%);
+  --sl-color-accent: hsl(194, 80%, 38%);
+  --sl-color-accent-high: hsl(205, 65%, 23%);
+  --sl-color-white: hsl(210, 34%, 14%);
+  --sl-color-gray-1: hsl(210, 34%, 14%);
+  --sl-color-gray-2: hsl(210, 22%, 24%);
+  --sl-color-gray-3: hsl(210, 17%, 40%);
+  --sl-color-gray-4: hsl(208, 16%, 58%);
+  --sl-color-gray-5: hsl(197, 20%, 85%);
+  --sl-color-gray-6: hsl(190, 30%, 95%);
+  --sl-color-gray-7: hsl(190, 33%, 98%);
+  --sl-color-black: hsl(210, 30%, 99%);
+  --sl-color-text: hsl(210, 22%, 24%);
+  --sl-color-text-accent: hsl(205, 65%, 23%);
+  --sl-color-text-invert: hsl(210, 30%, 99%);
+  --sl-color-bg: hsl(210, 30%, 99%);
+  --sl-color-bg-nav: hsla(190, 38%, 97%, 0.96);
+  --sl-color-bg-sidebar: hsla(192, 28%, 96%, 0.98);
+  --sl-color-bg-inline-code: hsl(192, 33%, 92%);
+  --sl-color-hairline-light: hsl(192, 26%, 88%);
+  --sl-color-hairline-shade: hsl(192, 20%, 84%);
+  --myo-panel-border: hsla(194, 28%, 34%, 0.14);
+}
+
+html {
+  background: linear-gradient(180deg, hsl(209, 37%, 8%) 0%, hsl(210, 42%, 6%) 100%);
+}
+
+html[data-theme='light'] {
+  background: linear-gradient(180deg, hsl(190, 46%, 98%) 0%, hsl(205, 34%, 95%) 100%);
+}
+
+body {
+  background: transparent;
+}
+
+@layer starlight.overrides {
+  .header {
+    backdrop-filter: blur(12px);
+    background: hsla(210, 40%, 8%, 0.9) !important;
+    border-bottom: 1px solid hsla(197, 24%, 18%, 0.8);
+    box-shadow: none;
+  }
+
+  html[data-theme='light'] .header {
+    background: hsla(190, 52%, 97%, 0.94) !important;
+    border-bottom: 1px solid hsla(194, 28%, 34%, 0.12);
+    box-shadow: none;
+  }
+
+  .sidebar-pane {
+    background: hsla(210, 40%, 8%, 0.98) !important;
+    border-inline-end: 1px solid hsla(197, 24%, 18%, 0.8);
+  }
+
+  html[data-theme='light'] .sidebar-pane {
+    background: hsla(192, 34%, 97%, 0.98) !important;
+    border-inline-end: 1px solid hsla(194, 24%, 86%, 0.9);
+  }
+
+  .site-title {
+    letter-spacing: 0.03em;
+  }
+
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(1.5rem, 3vw, 2.75rem);
+    border: 1px solid var(--myo-panel-border);
+    border-radius: 1.5rem;
+    background:
+      linear-gradient(145deg, hsla(197, 70%, 14%, 0.9), hsla(211, 39%, 10%, 0.88));
+    box-shadow:
+      0 24px 64px hsla(209, 55%, 4%, 0.3),
+      inset 0 1px 0 hsla(191, 90%, 70%, 0.14);
+  }
+
+  html[data-theme='light'] .hero {
+    background: linear-gradient(145deg, hsla(191, 55%, 97%, 0.98), hsla(200, 43%, 94%, 0.95));
+    box-shadow: 0 24px 48px hsla(196, 38%, 32%, 0.08);
+  }
+
+  html[data-theme='light'] .hero h1 {
+    color: var(--sl-color-gray-1);
+  }
+
+  html[data-theme='light'] .hero .tagline {
+    color: var(--sl-color-gray-2);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 82% 20%, hsla(191, 100%, 65%, 0.08), transparent 26%);
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  .hero > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero .tagline {
+    max-width: 40rem;
+  }
+
+  .hero img {
+    filter: drop-shadow(0 12px 32px hsla(191, 100%, 63%, 0.2));
+  }
+
+  h1,
+  h2,
+  h3,
+  .site-title {
+    font-family: var(--sl-font);
+  }
+
+  h2,
+  h3 {
+    letter-spacing: 0.03em;
+  }
+
+  a {
+    text-underline-offset: 0.18em;
+  }
+
+  html[data-theme='light'] .sl-link-button.secondary,
+  html[data-theme='light'] .sl-link-button.minimal,
+  html[data-theme='light'] .pagination-links a,
+  html[data-theme='light'] .sl-markdown-content :is(h1, h2, h3, h4, h5, h6),
+  html[data-theme='light'] .right-sidebar-panel :where(a) {
+    color: var(--sl-color-gray-1);
+  }
+
+  html[data-theme='light'] .sl-link-button.secondary {
+    border-color: var(--sl-color-gray-4);
+  }
+
+  html[data-theme='light'] .sl-link-button.secondary:hover,
+  html[data-theme='light'] .sl-link-button.minimal:hover {
+    color: var(--sl-color-accent-high);
+  }
+
+  code,
+  pre {
+    font-family: var(--sl-font-mono);
+  }
+
+  :not(pre) > code {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 999px;
+    padding: 0.16rem 0.55rem;
+  }
+
+  pre {
+    border: 1px solid var(--sl-color-gray-5);
+    box-shadow: inset 0 1px 0 hsla(190, 100%, 92%, 0.05);
+  }
+
+  table {
+    border-radius: 1rem;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  th {
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .sl-markdown-content blockquote {
+    border-inline-start-width: 3px;
+  }
+
+  .content-panel {
+    position: relative;
+  }
+
+  .sidebar-version {
+    padding: 0.75rem 0 1rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid var(--sl-color-hairline-shade);
+  }
+
+  @media (max-width: 50rem) {
+    .hero {
+      border-radius: 1.1rem;
+    }
+  }
+}
