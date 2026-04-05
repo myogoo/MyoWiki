@@ -1,19 +1,19 @@
 ---
 slug: ssec/26.1/getting-started/overview
 title: Overview
-description: What SSECLib is, how it initializes, and where its public API starts.
+description: What SSECLib is, how it starts, and where the public API begins.
 sidebar:
   order: 1
 ---
 
 SSECLib is an **annotation-driven command and event framework** for Fabric mods.
 
-Instead of hand-building Brigadier trees and manually wiring Fabric event callbacks, you:
+Instead of building Brigadier trees by hand and registering Fabric event callbacks one by one, you:
 
 - expose one or more `ssec` entrypoints in `fabric.mod.json`
 - implement `SSECInitializer`
 - point the library at the packages that contain annotated classes
-- let the scanner register command and event handlers for you
+- let the scanner register command and event handlers
 
 ## Startup flow
 
@@ -26,7 +26,7 @@ At startup it:
 3. collects the packages returned by `getPackagesToScan()`
 4. runs `SSECScanner.initialize()` after every package has been registered
 
-This is the core contract of the framework: your mod tells SSEC where the annotated classes live, and SSEC handles discovery and registration.
+This is the main contract of the framework: your mod tells SSEC where the annotated classes are, and SSEC handles discovery and registration.
 
 ## Main public surface
 
@@ -40,14 +40,14 @@ The public API is intentionally small:
 
 ## When to use it
 
-SSEC fits best when your mod has:
+SSEC is useful when your mod has:
 
 - multiple commands or subcommands
 - repeatable permission rules
 - a lot of command argument parsing
 - several Fabric callbacks that you want to keep close to feature code
 
-If your mod has one tiny command and no reusable event layer, plain Brigadier and plain Fabric callbacks may still be simpler.
+If your mod has only one small command and no reusable event layer, plain Brigadier and plain Fabric callbacks may still be simpler.
 
 ## Recommended next pages
 

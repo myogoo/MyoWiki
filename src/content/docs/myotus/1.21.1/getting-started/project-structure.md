@@ -9,9 +9,11 @@ sidebar:
 ## Source roots
 
 ```text
-1.20.1 -> /mnt/f/IntelliJ/MyoCertus/Myotus_1_20_1
+1.20.1 -> /mnt/f/IntelliJ/MyoCertus/MyoCertus_1_20_1
 1.21.1 -> /mnt/f/IntelliJ/MyoCertus/MyoCertus_1_21_1
 ```
+
+The current local Gradle metadata for these trees reports Myotus `15.0.1-SNAPSHOT` for `1.20.1` and `19.0.5` for `1.21.1`.
 
 ## Main packages
 

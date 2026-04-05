@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import { buildSidebar } from './src/config/projects.mjs';
+import { buildSidebar, buildVersionRootRedirects } from './src/config/projects.mjs';
 
 function normalizeBase(input) {
   if (!input || input === '/') {
@@ -90,11 +90,12 @@ const base = normalizeBase(process.env.BASE_PATH ?? getInferredBase(owner, repo,
 export default defineConfig({
   site,
   base,
+  redirects: buildVersionRootRedirects(),
   integrations: [
     starlight({
       title: 'MyoWiki',
-      description: 'API documentation hub for Myogoo projects and versioned integrations.',
-      tagline: 'Project and version aware docs for Myogoo APIs.',
+      description: 'Documentation for Myogoo projects and versioned integrations.',
+      tagline: 'Choose a project and version for Myogoo docs.',
       logo: {
         src: './src/assets/myotus-logo.svg',
         alt: 'Myotus logo',

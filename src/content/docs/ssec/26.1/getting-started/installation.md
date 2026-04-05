@@ -15,8 +15,18 @@ The local `sseclib` build metadata for this line declares:
 - version `26.1`
 - loader target `Fabric`
 - Java target `25`
+- Fabric Loader `0.18.4`
+- Fabric API `0.143.12+26.1`
 
 That means the intended published coordinate for this line is `me.myogoo:ssec:26.1`.
+
+## Source tree
+
+Location:
+
+```text
+/mnt/f/IntelliJ/SteveValley/SSECLib
+```
 
 ## Add the dependency
 

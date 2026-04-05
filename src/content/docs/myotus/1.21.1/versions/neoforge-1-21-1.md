@@ -13,6 +13,7 @@ sidebar:
 - Java `21`
 - Applied Energistics 2 `19.2.17`
 - GuideME `21.1.6`
+- Current local Myotus version `19.0.5`
 
 ## Source naming note
 
@@ -23,6 +24,8 @@ The inspected local path is:
 ```
 
 Even though the folder is named `MyoCertus_1_21_1`, the actual mod ID, packages, and published coordinates are `myotus`.
+
+The current published-style coordinate declared by the local Gradle metadata is `me.myogoo:myotus:19.0.5`.
 
 ## Major additions over 1.20.1
 

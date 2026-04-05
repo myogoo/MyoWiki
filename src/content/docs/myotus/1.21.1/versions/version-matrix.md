@@ -8,7 +8,8 @@ sidebar:
 
 | Area | 1.20.1 | 1.21.1 |
 | --- | --- | --- |
-| Source path | `/mnt/f/IntelliJ/MyoCertus/Myotus_1_20_1` | `/mnt/f/IntelliJ/MyoCertus/MyoCertus_1_21_1` |
+| Source path | `/mnt/f/IntelliJ/MyoCertus/MyoCertus_1_20_1` | `/mnt/f/IntelliJ/MyoCertus/MyoCertus_1_21_1` |
+| Myotus version | `15.0.1-SNAPSHOT` | `19.0.5` |
 | Loader | Forge `47.4.17` | NeoForge `21.1.219` |
 | Java | `17` | `21` |
 | Minecraft | `1.20.1` | `1.21.1` |

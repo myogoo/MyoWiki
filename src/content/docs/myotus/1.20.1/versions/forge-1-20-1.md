@@ -12,6 +12,7 @@ sidebar:
 - Forge `47.4.17`
 - Java `17`
 - Applied Energistics 2 `15.4.10`
+- Current local Myotus version `15.0.1-SNAPSHOT`
 
 ## Build profile
 

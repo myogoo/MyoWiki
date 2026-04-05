@@ -10,23 +10,26 @@ const versionRoutes = [
   {
     name: 'Myotus 1.20.1',
     path: routes.myotus120,
-    heading: 'Myotus 1.20.1',
+    rootPath: routes.myotus120Root,
+    heading: 'Overview',
     context: 'Myotus · 1.20.1',
-    heroLinks: ['Start Here', 'Player Guide', 'Browse API'],
+    links: ['Installation', 'Project Structure', 'Configuration'],
   },
   {
     name: 'Myotus 1.21.1',
     path: routes.myotus121,
-    heading: 'Myotus 1.21.1',
+    rootPath: routes.myotus121Root,
+    heading: 'Overview',
     context: 'Myotus · 1.21.1',
-    heroLinks: ['Start Here', 'Player Guide', 'Browse API'],
+    links: ['Installation', 'Project Structure', 'Version Matrix'],
   },
   {
     name: 'SSEC 26.1',
     path: routes.ssec261,
-    heading: 'SSEC 26.1',
+    rootPath: routes.ssec261Root,
+    heading: 'Overview',
     context: 'SSEC · 26.1',
-    heroLinks: ['Start Here', 'Install', 'Browse API'],
+    links: ['Installation', 'API Overview', 'Event System'],
   },
 ] as const;
 
@@ -35,15 +38,24 @@ for (const [viewportName, viewport] of Object.entries(viewports)) {
     test.use({ viewport });
 
     for (const scenario of versionRoutes) {
-      test(`${scenario.name} stays readable and navigable`, async ({ page }) => {
+      test(`${scenario.name} root redirects straight into the useful doc`, async ({ page }) => {
+        await gotoApp(page, scenario.rootPath);
+
+        await expect(page).toHaveURL(new RegExp(`${scenario.path.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}?$`));
+        await expect(page.getByRole('heading', { name: scenario.heading })).toBeVisible();
+        await expect(page.locator('.site-title-context')).toHaveText(scenario.context);
+        await expectNoHorizontalOverflow(page);
+      });
+
+      test(`${scenario.name} overview stays readable and navigable`, async ({ page }) => {
         await gotoApp(page, scenario.path);
 
         await expect(page.getByRole('heading', { name: scenario.heading })).toBeVisible();
         await expect(page.locator('.site-title-context')).toHaveText(scenario.context);
         await expectNoHorizontalOverflow(page);
 
-        for (const label of scenario.heroLinks) {
-          await expect(page.getByRole('link', { name: label, exact: true })).toBeVisible();
+        for (const label of scenario.links) {
+          await expect(page.getByRole('main').getByRole('link', { name: label, exact: true })).toBeVisible();
         }
       });
     }

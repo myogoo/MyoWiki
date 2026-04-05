@@ -2,7 +2,7 @@ export const PROJECTS = [
   {
     slug: 'myotus',
     label: 'Myotus',
-    description: 'AE2 terminal extension library and API surface.',
+    description: 'AE2 terminal extension library and API.',
     sidebarDirectories: ['developers', 'getting-started', 'player'],
     versions: [
       { slug: '1.21.1', label: '1.21.1', channel: 'NeoForge', latest: true },
@@ -12,7 +12,7 @@ export const PROJECTS = [
   {
     slug: 'ssec',
     label: 'SSEC',
-    description: 'Annotation-driven command and event framework for Fabric mods.',
+    description: 'Command and event framework for Fabric mods.',
     sidebarDirectories: ['developers', 'getting-started'],
     versions: [
       { slug: '26.1', label: '26.1', channel: 'Fabric', latest: true },
@@ -64,8 +64,27 @@ export function buildVersionHref(base, projectSlug, versionSlug, restSegments = 
   return joinBase(base, [projectSlug, versionSlug, ...restSegments].filter(Boolean).join('/'));
 }
 
+export function getProjectEntrySegments(project) {
+  return project?.sidebarDirectories?.includes('getting-started')
+    ? ['getting-started', 'overview']
+    : [];
+}
+
 export function buildProjectHref(base, projectSlug, versionSlug) {
-  return buildVersionHref(base, projectSlug, versionSlug, []);
+  return buildVersionHref(base, projectSlug, versionSlug, getProjectEntrySegments(getProject(projectSlug)));
+}
+
+export function buildVersionRootRedirects() {
+  return Object.fromEntries(
+    PROJECTS.flatMap((project) =>
+      project.versions.flatMap((version) => {
+        const source = buildVersionHref('/', project.slug, version.slug, []);
+        const destination = buildProjectHref('/', project.slug, version.slug);
+
+        return source === destination ? [] : [[source, destination]];
+      }),
+    ),
+  );
 }
 
 export function buildSidebar() {

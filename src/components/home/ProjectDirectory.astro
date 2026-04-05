@@ -1,22 +1,16 @@
 ---
 import {
-  PROJECTS,
   buildProjectHref,
-  buildVersionHref,
   getDefaultVersion,
+  PROJECTS,
 } from '../../config/projects.mjs';
 
 const base = import.meta.env.BASE_URL ?? '/';
 
 const projectCards = PROJECTS.map((project) => {
   const latestVersion = getDefaultVersion(project);
-  const latestHref = latestVersion
-    ? buildProjectHref(base, project.slug, latestVersion.slug)
-    : '#';
-  const startHref =
-    latestVersion && project.sidebarDirectories?.includes('getting-started')
-      ? buildVersionHref(base, project.slug, latestVersion.slug, ['getting-started', 'overview'])
-      : latestHref;
+  const latestHref = latestVersion ? buildProjectHref(base, project.slug, latestVersion.slug) : '#';
+  const startHref = latestHref;
 
   return {
     ...project,
@@ -33,9 +27,9 @@ const projectCards = PROJECTS.map((project) => {
 
 <section id="available-wikis" class="home-directory">
   <div class="home-directory__intro">
-    <p class="home-directory__eyebrow">Available wikis</p>
-    <h2>Two projects, three live docs lines</h2>
-    <p class="home-directory__lead">Open the project you need, then jump into the latest version or a specific line.</p>
+    <p class="home-directory__eyebrow">Projects</p>
+    <h2>Choose a project and version</h2>
+    <p class="home-directory__lead">Open the project you need. Then choose the latest version or another supported version.</p>
   </div>
 
   <div class="home-directory__grid">
@@ -62,7 +56,7 @@ const projectCards = PROJECTS.map((project) => {
 
           <div class="home-card__actions">
             <a class="home-card__action home-card__action--primary" href={project.startHref}>
-              Start Here
+              Open Docs
             </a>
           </div>
         </article>

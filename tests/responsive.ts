@@ -11,9 +11,12 @@ export const viewports = {
 
 export const routes = {
   home: withBasePath('/'),
-  myotus120: withBasePath('/myotus/1.20.1/'),
-  myotus121: withBasePath('/myotus/1.21.1/'),
-  ssec261: withBasePath('/ssec/26.1/'),
+  myotus120: withBasePath('/myotus/1.20.1/getting-started/overview/'),
+  myotus121: withBasePath('/myotus/1.21.1/getting-started/overview/'),
+  ssec261: withBasePath('/ssec/26.1/getting-started/overview/'),
+  myotus120Root: withBasePath('/myotus/1.20.1/'),
+  myotus121Root: withBasePath('/myotus/1.21.1/'),
+  ssec261Root: withBasePath('/ssec/26.1/'),
 } as const;
 
 const normalizedBaseURL = baseURL.endsWith('/') ? baseURL : `${baseURL}/`;

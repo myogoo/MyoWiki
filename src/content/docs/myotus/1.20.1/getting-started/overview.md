@@ -1,12 +1,12 @@
 ---
 slug: myotus/1.20.1/getting-started/overview
 title: Overview
-description: What Myotus is, who it is for, and what the Forge 1.20.1 line actually adds.
+description: What Myotus is, who it is for, and what the Forge 1.20.1 line includes.
 sidebar:
   order: 1
 ---
 
-Myotus is a **library-first extension layer** for Applied Energistics 2 terminals.
+Myotus is a **shared library for Applied Energistics 2 terminal extensions**.
 
 It is not designed as a large standalone gameplay mod. In `1.20.1`, it provides a shared place for:
 
@@ -20,8 +20,8 @@ It is not designed as a large standalone gameplay mod. In `1.20.1`, it provides 
 ## Who should use it
 
 - **Players** who install another mod that depends on Myotus and need to understand the terminal settings it exposes.
-- **Addon developers** who want to attach optional behavior to AE2 terminals without rebuilding loader checks and config-tab plumbing.
-- **Maintainers** supporting Forge `1.20.1` specifically or comparing it with the later NeoForge line.
+- **Addon developers** who want to add optional behavior to AE2 terminals without reimplementing loader checks and config tab registration.
+- **Maintainers** supporting Forge `1.20.1` specifically or comparing it with the NeoForge `1.21.1` line.
 
 ## Baseline
 
@@ -32,7 +32,7 @@ It is not designed as a large standalone gameplay mod. In `1.20.1`, it provides 
 
 ## Bootstrap flow
 
-`Myotus.java` performs the real startup work for this line:
+`Myotus.java` contains the startup logic for this line:
 
 1. it installs `MyotusAPIImpl.INSTANCE` as the active API implementation
 2. it registers the built-in optional integration markers for JEI, EMI, REI, AE2WTLib, AE2FCT, and AE2TB

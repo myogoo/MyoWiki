@@ -1,12 +1,12 @@
 ---
 slug: myotus/1.21.1/getting-started/overview
 title: Overview
-description: What Myotus is, who it is for, and what it adds across the supported version lines.
+description: What Myotus is, who it is for, and what each supported version includes.
 sidebar:
   order: 1
 ---
 
-Myotus is a **library-first extension layer** for Applied Energistics 2 terminals.
+Myotus is a **shared library for Applied Energistics 2 terminal extensions**.
 
 The inspected `1.21.1` tree lives at `/mnt/f/IntelliJ/MyoCertus/MyoCertus_1_21_1` and targets NeoForge `21.1.219` on Java `21`.
 
@@ -21,7 +21,7 @@ It is not designed as a large standalone gameplay mod. Instead, it provides a sh
 ## Who should use it
 
 - **Players** who install another mod that depends on Myotus and need to understand the terminal settings it exposes.
-- **Addon developers** who want to attach optional behavior to AE2 terminals without rebuilding loader checks and config-tab plumbing.
+- **Addon developers** who want to add optional behavior to AE2 terminals without reimplementing loader checks and config tab registration.
 - **Maintainers** supporting both Forge `1.20.1` and NeoForge `1.21.1`.
 
 ## Core behavior by version
