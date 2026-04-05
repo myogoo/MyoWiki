@@ -15,13 +15,13 @@ for (const [viewportName, viewport] of Object.entries(viewports)) {
       await gotoApp(page, routes.home);
 
       await expect(page.locator('.home-card')).toHaveCount(2);
-      await expect(page.getByRole('heading', { name: /Two projects, three live docs lines/i })).toBeVisible();
+      await expect(page.getByRole('heading', { name: /Choose a project and version/i })).toBeVisible();
       await expectNoHorizontalOverflow(page);
 
       const myotusCard = page.locator('.home-card').filter({
         has: page.getByRole('heading', { name: 'Myotus' }),
       });
-      await myotusCard.getByRole('link', { name: 'Start Here' }).click();
+      await myotusCard.getByRole('link', { name: 'Open Docs' }).click();
       await expect(page).toHaveURL(/\/myotus\/1\.21\.1\/getting-started\/overview\/?$/);
       await expect(page.getByRole('heading', { name: 'Overview' })).toBeVisible();
       await expect(page.locator('.site-title-context')).toHaveText('Myotus · 1.21.1');
@@ -36,7 +36,7 @@ for (const [viewportName, viewport] of Object.entries(viewports)) {
       const ssecCard = page.locator('.home-card').filter({
         has: page.getByRole('heading', { name: 'SSEC' }),
       });
-      await ssecCard.getByRole('link', { name: 'Start Here' }).click();
+      await ssecCard.getByRole('link', { name: 'Open Docs' }).click();
       await expect(page).toHaveURL(/\/ssec\/26\.1\/getting-started\/overview\/?$/);
       await expect(page.getByRole('heading', { name: 'Overview' })).toBeVisible();
       await expect(page.locator('.site-title-context')).toHaveText('SSEC · 26.1');

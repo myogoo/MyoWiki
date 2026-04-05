@@ -21,9 +21,9 @@ const viewports = [
 
 async function openHome(page: Page) {
   await gotoApp(page, routes.home);
-  await expect(page.getByRole('heading', { name: /pick a wiki/i })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Choose a project and version' })).toBeVisible();
   await expect(
-    page.getByRole('heading', { name: /two projects, three live docs lines/i }),
+    page.getByText(/open the project you need\. then choose the latest version/i),
   ).toBeVisible();
 }
 
@@ -36,7 +36,7 @@ test.describe('home page responsive layout', () => {
       const cards = page.locator('.home-card');
       await expect(cards).toHaveCount(2);
       await expect(page.locator('.home-directory__grid')).toBeVisible();
-      await expect(page.getByRole('link', { name: /start here/i }).first()).toBeVisible();
+      await expect(page.getByRole('link', { name: /open docs/i }).first()).toBeVisible();
 
       const first = await cards.nth(0).boundingBox();
       const second = await cards.nth(1).boundingBox();
