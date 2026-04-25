@@ -97,7 +97,7 @@ export default defineConfig({
       description: 'Documentation for Myogoo projects and versioned integrations.',
       tagline: 'Choose a project and version for Myogoo docs.',
       logo: {
-        src: './src/assets/myotus-logo.svg',
+        src: './src/assets/myotus.pn',
         alt: 'Myotus logo',
       },
       favicon: '/favicon.svg',
