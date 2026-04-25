@@ -16,18 +16,20 @@ Both supported lines include:
 - a Myotus-specific client config file
 - terminal-aware keybinding context
 - integration-aware command output
+- terminal upgrade slots for addons that provide `ITerminalUpgradeCard` items
 
 ## 1.20.1 highlights
 
 - Includes a terminal settings screen registered through `MyotusConfigTab.initialize()`
 - Supports sorting active tabs first through the `activeTabSorting` client option
 - Can optionally open the side panel automatically when the terminal opens
+- Includes terminal upgrade-card storage and AE2WTLib `AddTerminalEvent` compatibility
 
 ## 1.21.1 highlights
 
 - Keeps the terminal settings screen and side-panel open behavior
 - Adds a dedicated keybind for toggling the sub side panel
-- Adds the underlying system for terminal upgrade cards and player-persistent slot storage
+- Uses the NeoForge implementation of the terminal upgrade-card storage model
 
 ## Important expectation for players
 

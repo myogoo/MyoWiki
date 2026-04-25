@@ -9,11 +9,11 @@ sidebar:
 ## Source roots
 
 ```text
-1.20.1 -> /mnt/f/IntelliJ/MyoCertus/MyoCertus_1_20_1
-1.21.1 -> /mnt/f/IntelliJ/MyoCertus/MyoCertus_1_21_1
+1.20.1 -> /mnt/f/IntelliJ/Minecraft/Myotus/Myotus_1_20_1
+1.21.1 -> /mnt/f/IntelliJ/Minecraft/Myotus/Myotus_1_21_1
 ```
 
-The current local Gradle metadata for these trees reports Myotus `15.0.1-SNAPSHOT` for `1.20.1` and `19.0.5` for `1.21.1`.
+The current local Gradle metadata for these trees reports Myotus `15.0.7` for `1.20.1` and `19.0.9` for `1.21.1`.
 
 ## Main packages
 
@@ -63,16 +63,15 @@ api/
 
 - Uses Forge and Java `17`
 - Keeps config in `ForgeConfigSpec`
-- Exposes the core registrars and runtime integration manager
-- Ships the terminal settings screen, command bootstrap, and item-list integration hooks
+- Uses Forge data conditions and a Myotus-owned AE2WTLib compatibility facade
+- Also ships terminal settings, upgrade-card storage, command bootstrap, and item-list integration hooks
 
 ### 1.21.1
 
 - Uses NeoForge and Java `21`
 - Expands API documentation directly in source Javadocs
-- Adds config-tab visibility/context helpers
-- Adds `MyoModCondition` for NeoForge data conditions
-- Adds terminal upgrade card interfaces and storage helpers
+- Uses NeoForge data condition codecs
+- Uses the upstream AE2WTLib API module
 - Adds item registration, access transformers, mixins, and Maven publishing configuration
 
 ## Practical reading order
@@ -80,5 +79,5 @@ api/
 - Start at `Myotus.java` for bootstrap behavior.
 - Move to `api/` to understand the public surface.
 - Check `init/`, `integration/`, and `commands/` for user-visible extension hooks.
-- Inspect `menu/` and `item/` when working on `1.21.1` upgrade card functionality.
+- Inspect `menu/` and `item/` when working on upgrade card functionality.
 - Inspect `mixin/ae2` when you need to understand how terminal storage and the floating side panel are injected into AE2.

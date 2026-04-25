@@ -29,10 +29,11 @@ GuideME-related addon code is also present in the repository, but it is not part
 2. Register that marker against a mod ID.
 3. Use the runtime integration manager to decide whether to activate integration-specific behavior.
 
-On `1.20.1`, registration happens through the lower-level registrar methods:
+On `1.20.1`, registration can use either the original registrar methods or the fluent aliases:
 
 ```java
-MyotusAPI.get().modRegistrar().loadableMod(MyMarker.class, "examplemod", "[2.0.0,)");
+MyotusAPI.modRegistrar()
+        .registerLoadableMod(MyMarker.class, "examplemod", "[2.0.0,)");
 ```
 
 `loadableMod(...)` also has overloads that accept a display name and version range. Internally, Myotus stores the registration as a `SupportedMod` and checks the loaded mod version against a Maven-style range.
@@ -41,12 +42,28 @@ If the mod is present but the version is outside the requested range, `ModIntegr
 ## Example
 
 ```java
-MyotusAPI.get().modRegistrar().loadableMod(MyMarker.class, "examplemod", "[2.0.0,)");
+MyotusAPI.modRegistrar()
+        .registerLoadableMod(MyMarker.class, "examplemod", "[2.0.0,)");
 
-if (MyotusAPI.get().modIntegrationManager().isLoaded(MyMarker.class)) {
+if (MyotusAPI.modIntegrationManager().isLoaded(MyMarker.class)) {
     // Apply optional integration code.
 }
 ```
+
+## AE2WTLib terminal registration
+
+The `1.20.1` line also ships an AE2WTLib compatibility facade for the `1.21.1` terminal-registration API:
+
+```java
+AddTerminalEvent.register(event -> event
+        .builder("example", ExampleMenuHost::new, ExampleMenu.TYPE, EXAMPLE_TERMINAL.get(), Icon.CRAFTING)
+        .hotkeyName("wireless_example_terminal")
+        .addTerminal());
+```
+
+This facade exists under the same package names used by AE2WTLib `1.21.1`, such as `de.mari_023.ae2wtlib.api.registration.AddTerminalEvent`.
+
+On Forge `1.20.1`, Myotus runs the event from an optional AE2WTLib mixin and delegates registration into AE2WTLib `1.20.1`'s existing wireless terminal handler. `WTDefinitionBuilder.upgradeCount(...)` and `noUpgrades()` are accepted so shared source can compile, but that AE2WTLib line does not store per-terminal upgrade counts.
 
 ## Runtime inspection
 
@@ -62,4 +79,5 @@ Use it whenever integration-specific classes or mixins must be gated by loader s
 
 - `SafeClass` wraps reflective class resolution so optional integrations can fail soft when a class is missing.
 - `ItemListModLoadHelper` uses the same integration registry to gate JEI, EMI, and REI subscriber dispatch.
+- `MyoModCondition` uses the same registry for Forge data and recipe conditions.
 - GuideME addon code in the repository follows the same general pattern: only activate the integration path when the target mod is actually available.

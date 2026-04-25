@@ -6,7 +6,7 @@ sidebar:
   order: 7
 ---
 
-`ITerminalUpgradeCard` is a **1.21.1-only** API. It does not exist in the inspected `1.20.1` codebase.
+`ITerminalUpgradeCard` is available in both maintained Myotus lines. This page describes the NeoForge `1.21.1` implementation.
 
 ## Purpose
 
@@ -25,7 +25,9 @@ public interface ITerminalUpgradeCard {
 ## Authoring expectations
 
 - upgrade cards should be non-stackable
-- callbacks are server-side terminal lifecycle hooks
+- open and close callbacks can run on both logical sides
+- tick callbacks run from the server-side menu update flow
+- only one copy of the same item type can be installed in a terminal at a time
 - only override the hooks your card actually needs
 - the menu mixin dispatches open/close/tick callbacks when cards are inserted, removed, or the menu updates
 
@@ -53,11 +55,10 @@ Important details from the inspected implementation:
 
 - slot count is fixed at `5`
 - storage is keyed per terminal-specific storage key
-- legacy NBT keys are migrated when found
-- the old shared `terminal_upgrades` payload is migrated into the first terminal opened after the update
 - item-hosted terminals use the `myotus_terminal_storage_uuid` custom-data key to keep portable storage buckets distinct
+- AE2WTLib wireless terminal merges preserve the original terminal storage identity when possible
 
-See [Upgrade Storage](/myotus/1.21.1/developers/upgrade-storage/) for the full storage-key, migration, and menu-mixin flow.
+See [Upgrade Storage](/myotus/1.21.1/developers/upgrade-storage/) for the full storage-key, merge, and menu-mixin flow.
 
 ## Built-in example item
 

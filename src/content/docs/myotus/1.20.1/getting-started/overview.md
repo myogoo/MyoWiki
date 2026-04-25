@@ -13,8 +13,12 @@ It is not designed as a large standalone gameplay mod. In `1.20.1`, it provides 
 - optional mod integration registration
 - item-list integration markers and subscriber dispatch
 - terminal configuration tab registration
+- terminal configuration tab visibility predicates
 - runtime integration checks
 - terminal-side UI helpers
+- terminal upgrade card hooks and persistent storage
+- Forge data conditions backed by the Myotus integration registry
+- AE2WTLib `AddTerminalEvent` compatibility
 - annotation-driven commands
 
 ## Who should use it
@@ -29,6 +33,7 @@ It is not designed as a large standalone gameplay mod. In `1.20.1`, it provides 
 - Minecraft: `1.20.1`
 - Java: `17`
 - AE2: `15.4.10`
+- AE2WTLib integration target: `15.3.3-forge`
 
 ## Bootstrap flow
 
@@ -52,15 +57,13 @@ The Myotus bootstrap registers integration markers for these mod IDs in `1.20.1`
 
 The repository also contains GuideME-related addon and mixin code, even though GuideME is not registered through the same marker list in the constructor bootstrap.
 
-## Important limitations
+## Compatibility boundaries
 
-The Forge line does not include:
+The Forge line now carries most of the public API shape used by the `1.21.1` line, but a few implementation details remain loader- or dependency-specific:
 
-- `MyoConfigTabContext`
-- `MyoConfigTabVisibility`
-- `MyoModCondition`
-- `ITerminalUpgradeCard`
-- persistent terminal upgrade storage
+- `MyoModCondition` is implemented as a Forge crafting condition, while `1.21.1` uses NeoForge's condition codec.
+- AE2WTLib `AddTerminalEvent` is provided as a 1.21-style compatibility facade and delegates into AE2WTLib `1.20.1`'s existing wireless terminal handler.
+- `WTDefinitionBuilder.upgradeCount(...)` and `noUpgrades()` are accepted for source compatibility, but AE2WTLib `1.20.1` does not store per-terminal upgrade counts.
 
 ## Where to go next
 
@@ -68,3 +71,4 @@ The Forge line does not include:
 - [Project Structure](/myotus/1.20.1/getting-started/project-structure/) for package and resource layout.
 - [Configuration](/myotus/1.20.1/player/configuration/) for the keybinding and client config.
 - [Item List Integrations](/myotus/1.20.1/developers/item-list-integrations/) for JEI, EMI, and REI subscriber flow.
+- [Optional Integrations](/myotus/1.20.1/developers/optional-integrations/) for AE2WTLib and other optional mod gates.

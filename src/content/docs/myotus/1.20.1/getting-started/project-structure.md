@@ -9,10 +9,10 @@ sidebar:
 ## Source roots
 
 ```text
-/mnt/f/IntelliJ/MyoCertus/MyoCertus_1_20_1
+/mnt/f/IntelliJ/Minecraft/Myotus/Myotus_1_20_1
 ```
 
-The current local Gradle metadata for this tree reports Myotus version `15.0.1-SNAPSHOT`.
+The current local Gradle metadata for this tree reports Myotus version `15.0.7`.
 
 ## Main packages
 
@@ -25,9 +25,13 @@ me/myogoo/myotus/
 ├─ impl/          Internal registrar and API implementations
 ├─ init/          Bootstrap wiring, config registration, keybinding registration, and config-tab setup
 ├─ integration/   Optional integration helpers for item-list and GuideME paths
+├─ item/          Development sample upgrade-card items
+├─ menu/          Terminal upgrade slot, storage, and helper classes
 ├─ mixin/         AE2 and GuideME mixins
 └─ util/          Annotation scanning and optional-mod version checks
 ```
+
+The `1.20.1` tree also contains `de/mari_023/ae2wtlib/api/...` compatibility classes. They mirror the 1.21 AE2WTLib registration API package names while delegating into AE2WTLib `1.20.1` internals.
 
 ## API subpackages worth knowing
 
@@ -35,8 +39,10 @@ me/myogoo/myotus/
 api/
 ├─ annotation/    Marker annotations for optional integrations and item-list loaders
 ├─ command/       `@MyoCommand`, `@MyoExecute`, `@MyoArgument`
-├─ config/        `MyoConfigTab` and `MyoConfigTabScreen`
+├─ config/        `MyoConfigTab`, visibility predicates, and tab screen contracts
+├─ datagen/       `MyoModCondition` for Forge data/recipe conditions
 ├─ integration/   Runtime integration manager interface
+├─ network/       Shared Myotus packet registration and dispatch facade
 ├─ registrar/     Public registration interfaces
 └─ util/          `SafeClass` reflection helper
 ```
@@ -58,11 +64,13 @@ api/
 - `config/` contains the Forge client config spec that persists `myotus-client.toml`.
 - `init/` wires the Forge bootstrap events together.
 - `integration/` contains the item-list dispatch bridge and GuideME addon hooks.
-- `mixin/` patches AE2 screens and menu behavior to add the Myotus terminal UI.
+- `menu/` contains terminal upgrade-card storage, filters, and query helpers.
+- `mixin/` patches AE2 screens and menu behavior to add the Myotus terminal UI and optional AE2WTLib behavior.
 
 ## Practical reading order
 
 1. Start at `Myotus.java` for bootstrap behavior.
 2. Move to `api/` to understand the public surface.
-3. Check `init/`, `integration/`, and `commands/` for user-visible extension hooks.
-4. Inspect `client/` and `mixin/` for the AE2 terminal UI additions.
+3. Check `de/mari_023/ae2wtlib/api/registration` when working on AE2WTLib `AddTerminalEvent` compatibility.
+4. Check `init/`, `integration/`, and `commands/` for user-visible extension hooks.
+5. Inspect `client/`, `menu/`, and `mixin/` for the AE2 terminal UI additions.

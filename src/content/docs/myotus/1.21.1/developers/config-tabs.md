@@ -37,7 +37,7 @@ MyotusAPI.configRegistrar().registerTerminalConfigTab(new MyoConfigTab(
 
 ## Visibility helpers
 
-`1.21.1` adds a first-class visibility layer:
+Myotus exposes a first-class visibility layer:
 
 - `MyoConfigTabVisibility.ALWAYS_VISIBLE`
 - `MyoConfigTab.visibleWhen(...)`
@@ -74,9 +74,7 @@ Both lines call `MyotusConfigTab.initialize()` during common setup and register 
 
 ## Registrar helpers
 
-`IConfigRegistrar` in `1.21.1` also adds fluent helpers:
+`IConfigRegistrar` also exposes fluent helpers:
 
 - `registerTerminalConfigTab(tab)`
 - `registerTerminalConfigTabs(iterable)`
-
-Those helpers are not present in the older `1.20.1` line.

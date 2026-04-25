@@ -16,15 +16,17 @@ In `1.20.1`, a config tab definition contains:
 - either a texture blitter or an `ItemStack` icon
 - a `stylePath` pointing at the active screen style JSON
 - a `MyoConfigTabScreen` implementation used to build the tab UI
+- a `MyoConfigTabVisibility` predicate that decides whether the tab is visible for the currently opened terminal
 
 ## Example
 
 ```java
-MyotusAPI.get().configRegistrar().terminalConfigTab(new MyoConfigTab(
+MyotusAPI.configRegistrar().registerTerminalConfigTab(new MyoConfigTab(
         Component.literal("Example"),
         Icon.COG,
         "example_terminal.json",
-        new ExampleConfigScreen()));
+        new ExampleConfigScreen())
+        .visibleWhen(context -> context.menu() != null));
 ```
 
 ## Icon options
@@ -35,16 +37,16 @@ MyotusAPI.get().configRegistrar().terminalConfigTab(new MyoConfigTab(
 - Myotus `MyoIcon`
 - plain `ItemStack`
 
-## What this line does not include
+## Visibility
 
-The Forge line does not include:
+`MyoConfigTab.visibleWhen(...)` returns a copy of the tab with a new predicate attached.
 
-- `MyoConfigTabVisibility`
-- `MyoConfigTabContext`
-- the `visibleWhen()` copy helper
-- bulk registration helpers on `IConfigRegistrar`
+The predicate receives a `MyoConfigTabContext`, which is built from the current `MEStorageMenu`. Use this when a tab should only appear for specific terminal hosts, item terminals, or optional integration states.
 
-If you need conditional visibility on `1.20.1`, gate the registration yourself before calling `terminalConfigTab(tab)`.
+`IConfigRegistrar` also exposes bulk and fluent helpers:
+
+- `registerTerminalConfigTab(tab)`
+- `registerTerminalConfigTabs(tabs)`
 
 ## Style path
 

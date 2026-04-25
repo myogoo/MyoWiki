@@ -16,18 +16,20 @@ sidebar:
 
 ## Public API changes
 
-### New in 1.21.1
+### Shared in the current source trees
 
 - `MyotusAPI.isInitialized()`
 - static convenience accessors like `MyotusAPI.modRegistrar()`
 - fluent aliases on registrar interfaces
 - `ITerminalUpgradeCard`
+- `MyoConfigTabContext`, `MyoConfigTabVisibility`, and `visibleWhen(...)`
+- `MyoModCondition`
 
-### Still conceptually shared
+### Line-specific differences
 
-- config-tab registration
-- optional integration registration
-- runtime integration queries
+- `1.20.1` implements `MyoModCondition` through Forge's `IConditionSerializer`; `1.21.1` uses NeoForge condition codecs.
+- `1.20.1` includes a Myotus-owned AE2WTLib `AddTerminalEvent` compatibility facade; `1.21.1` relies on AE2WTLib's upstream API module.
+- `1.20.1` exposes the Myotus networking facade; it is not present in the inspected `1.21.1` API package.
 
 ## User-facing differences
 
@@ -38,7 +40,7 @@ sidebar:
 ### Added
 
 - `1.21.1` adds a toggle key for the sub side panel
-- `1.21.1` adds upgrade-card slot and storage infrastructure
+- both maintained lines now have upgrade-card slot and storage infrastructure
 
 ## Build and publishing differences
 
@@ -58,5 +60,6 @@ sidebar:
 
 1. Move loader and Java assumptions first.
 2. Keep shared API usage in the registrar/runtime-manager layer where possible.
-3. Treat upgrade-card functionality as `1.21.1`-only unless you backport it yourself.
-4. Re-check config and keybind docs instead of assuming parity between lines.
+3. Treat `MyoModCondition` registration as loader-specific.
+4. Treat AE2WTLib registration as API-compatible but implementation-specific.
+5. Re-check config and keybind docs instead of assuming parity between lines.

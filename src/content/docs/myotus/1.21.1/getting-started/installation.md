@@ -16,7 +16,7 @@ Myotus is mostly infrastructure. In most cases you install it because another mo
 - Java `17`
 - Forge `47.4.17`
 - Applied Energistics 2 `15.4.10`
-- Current local Myotus version `15.0.1-SNAPSHOT`
+- Current local Myotus version `15.0.7`
 
 ### NeoForge 1.21.1
 
@@ -24,7 +24,7 @@ Myotus is mostly infrastructure. In most cases you install it because another mo
 - Java `21`
 - NeoForge `21.1.219`
 - Applied Energistics 2 `19.2.17`
-- Current local Myotus version `19.0.5`
+- Current local Myotus version `19.0.9`
 
 Optional integrations only become relevant when the matching mods are installed.
 
@@ -35,7 +35,7 @@ Optional integrations only become relevant when the matching mods are installed.
 Location:
 
 ```text
-/mnt/f/IntelliJ/MyoCertus/MyoCertus_1_20_1
+/mnt/f/IntelliJ/Minecraft/Myotus/Myotus_1_20_1
 ```
 
 Typical commands:
@@ -51,7 +51,7 @@ Typical commands:
 Location:
 
 ```text
-/mnt/f/IntelliJ/MyoCertus/MyoCertus_1_21_1
+/mnt/f/IntelliJ/Minecraft/Myotus/Myotus_1_21_1
 ```
 
 Typical commands:
@@ -86,7 +86,7 @@ repositories {
 }
 
 dependencies {
-    implementation "me.myogoo:myotus:19.0.5"
+    implementation "me.myogoo:myotus:19.0.9"
 }
 ```
 
@@ -95,5 +95,5 @@ dependencies {
 - The `1.20.1` codebase is a ForgeGradle mod project.
 - The `1.21.1` codebase is a NeoForge moddev + Maven publishing project.
 - Generated resources land under `src/generated/resources/` through the data-generation path.
-- The `1.21.1` source currently declares Myotus `19.0.5`, Minecraft `1.21.1`, NeoForge `21.1.219`, Java `21`, AE2 `19.2.17`, and GuideME `21.1.6`.
+- The `1.21.1` source currently declares Myotus `19.0.9`, Minecraft `1.21.1`, NeoForge `21.1.219`, Java `21`, AE2 `19.2.17`, AE2WTLib `19.2.5`, and GuideME `21.1.6`.
 - If you maintain both lines, treat them as separate targets rather than expecting drop-in compatibility.

@@ -8,7 +8,7 @@ sidebar:
 
 Myotus is a **shared library for Applied Energistics 2 terminal extensions**.
 
-The inspected `1.21.1` tree lives at `/mnt/f/IntelliJ/MyoCertus/MyoCertus_1_21_1` and targets NeoForge `21.1.219` on Java `21`.
+The inspected `1.21.1` tree lives at `/mnt/f/IntelliJ/Minecraft/Myotus/Myotus_1_21_1` and targets NeoForge `21.1.219` on Java `21`.
 
 It is not designed as a large standalone gameplay mod. Instead, it provides a shared place for:
 
@@ -16,7 +16,7 @@ It is not designed as a large standalone gameplay mod. Instead, it provides a sh
 - item-list integration markers and static subscriber dispatch
 - terminal configuration tab registration
 - terminal upgrade card hooks and persistent storage support
-- `1.21.1` config tab visibility and NeoForge data conditions
+- NeoForge data conditions and publishing support in the `1.21.1` line
 
 ## Who should use it
 
@@ -28,8 +28,8 @@ It is not designed as a large standalone gameplay mod. Instead, it provides a sh
 
 | Line | Loader | Focus |
 | --- | --- | --- |
-| `1.20.1` | Forge `47.4.17` | Core terminal config tabs, item-list subscriber hooks, keybinding, runtime integration tracking |
-| `1.21.1` | NeoForge `21.1.219` | Same foundation plus config-tab visibility, NeoForge data conditions, terminal upgrade cards, persistent upgrade storage, and publishing setup |
+| `1.20.1` | Forge `47.4.17` | Core terminal config tabs, item-list subscriber hooks, keybinding, runtime integration tracking, upgrade cards, Forge data conditions, and AE2WTLib `AddTerminalEvent` compatibility |
+| `1.21.1` | NeoForge `21.1.219` | Shared terminal/config/upgrade foundation with NeoForge condition codecs, upstream AE2WTLib API behavior, and publishing setup |
 
 ## Built-in integration markers
 
@@ -44,16 +44,13 @@ The Myotus bootstrap registers integration markers for these mod IDs in both lin
 
 The repository also contains GuideME-related optional runtime integration and mixin code, even though GuideME is not registered through the same marker list in the constructor bootstrap.
 
-## Additional `1.21.1` API surface
+## Additional `1.21.1` notes
 
-This line also adds:
+This line uses the NeoForge implementation of APIs that are now mostly shared across maintained Myotus versions:
 
-- `MyotusAPI.modRegistrar()`, `MyotusAPI.configRegistrar()`, and `MyotusAPI.modIntegrationManager()`
-- `MyoConfigTabContext` and `MyoConfigTabVisibility`
-- `MyoModCondition` for NeoForge conditions
-- `MyotusAPI.isInitialized()`
-- fluent registrar aliases on both `IModRegistrar` and `IConfigRegistrar`
-- `ITerminalUpgradeCard`, `TerminalUpgradeHelper`, and `TerminalUpgradeStorageKey`
+- `MyoModCondition` is registered through NeoForge's condition codec path.
+- AE2WTLib terminal registration comes from the upstream AE2WTLib API module.
+- Maven publishing and API-jar generation are part of this line's build.
 
 ## Where to go next
 

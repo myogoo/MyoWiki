@@ -17,7 +17,8 @@ Myotus is mostly infrastructure. In most cases you install it because another mo
 - Forge `47.4.17`
 - Applied Energistics 2 `15.4.10`
 - GuideME `20.1.11` appears in the inspected source tree as a compile/runtime dependency
-- Current local source version `15.0.1-SNAPSHOT`
+- AE2WTLib `15.3.3-forge` is declared as a compile-only optional integration target
+- Current local source version `15.0.7`
 
 Optional integrations only become relevant when the matching mods are installed.
 
@@ -28,15 +29,15 @@ Optional integrations only become relevant when the matching mods are installed.
 Location:
 
 ```text
-/mnt/f/IntelliJ/MyoCertus/MyoCertus_1_20_1
+/mnt/f/IntelliJ/Minecraft/Myotus/Myotus_1_20_1
 ```
 
 Typical commands:
 
 ```bash
-./gradlew build
-./gradlew runClient
-./gradlew runGameTestServer
+cmd.exe /c "gradlew.bat build --console=plain"
+cmd.exe /c "gradlew.bat runClient --console=plain"
+cmd.exe /c "gradlew.bat runGameTestServer --console=plain"
 ```
 
 ### Project shape
@@ -47,5 +48,6 @@ The `1.20.1` codebase is a ForgeGradle mod project that uses:
 - access transformers
 - Sponge Mixin Gradle
 - `myotus-client.toml` for client config state
+- compile-only AE2WTLib API compatibility for `AddTerminalEvent`
 
 If you are packaging or testing locally, treat this line as a normal Forge mod project rather than a published library artifact.

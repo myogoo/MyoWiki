@@ -1,14 +1,14 @@
 ---
 slug: myotus/1.20.1/developers/terminal-upgrade-cards
 title: Terminal Upgrade Cards
-description: The 1.21.1 terminal upgrade card system, lifecycle hooks, and persistent storage behavior.
+description: The terminal upgrade card system, lifecycle hooks, and persistent storage behavior in Forge 1.20.1.
 sidebar:
   order: 6
 ---
 
-`ITerminalUpgradeCard` is a **1.21.1-only** API. It does not exist in the inspected `1.20.1` codebase.
+`ITerminalUpgradeCard` is available in the Forge `1.20.1` line.
 
-`1.20.1` does already inject terminal UI scaffolding through `MEStorageMenuMixin` and `MyoSlotSemantics`, including the floating side panel and placeholder upgrade slot semantics. What it does **not** ship is the card interface, card lifecycle callbacks, or persistent upgrade storage.
+Myotus injects terminal UI scaffolding through `MEStorageMenuMixin` and `MyoSlotSemantics`, including the floating side panel, upgrade slot semantics, card lifecycle callbacks, and persistent upgrade storage.
 
 ## Purpose
 
@@ -27,7 +27,9 @@ public interface ITerminalUpgradeCard {
 ## Authoring expectations
 
 - upgrade cards should be non-stackable
-- callbacks are server-side terminal lifecycle hooks
+- open and close callbacks can run on both logical sides
+- tick callbacks run from the server-side menu update flow
+- only one copy of the same item type can be installed in a terminal at a time
 - only override the hooks your card actually needs
 
 ## Example
@@ -54,14 +56,14 @@ Important details from the inspected implementation:
 
 - slot count is fixed at `5`
 - storage is keyed per terminal-specific storage key
-- legacy NBT keys are migrated when found
-- the old shared `terminal_upgrades` payload is migrated into the first terminal opened after the update
+- item-hosted terminals use the `myotus_terminal_storage_uuid` tag to keep portable storage buckets distinct
+- AE2WTLib wireless terminal merges preserve the original terminal storage identity when possible
 
-See [Upgrade Storage](/myotus/1.20.1/developers/upgrade-storage/) for the full storage-key, migration, and menu-mixin flow.
+See [Upgrade Storage](/myotus/1.20.1/developers/upgrade-storage/) for the full storage-key, merge, and menu-mixin flow.
 
 ## Built-in example item
 
-The `1.21.1` tree contains a `DiamondUpgradeCardItem` test item. It is registered only outside production builds and grants a diamond when the terminal opens.
+The source tree contains a `DiamondUpgradeCardItem` test item. It is registered only outside production builds and grants a diamond when the terminal opens.
 
 That makes it a dev example, not a production-facing gameplay feature.
 

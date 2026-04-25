@@ -1,12 +1,12 @@
 ---
 slug: myotus/1.21.1/developers/datagen-conditions
 title: Datagen Conditions
-description: Using MyoModCondition to gate NeoForge data output on active Myotus integrations.
+description: Using MyoModCondition to gate data output on active Myotus integrations.
 sidebar:
   order: 6
 ---
 
-`MyoModCondition` is a `1.21.1`-only NeoForge data condition.
+`MyoModCondition` is available in both maintained Myotus lines. This page describes the NeoForge `1.21.1` implementation.
 
 It evaluates to `true` when a mod ID registered through Myotus integrations is currently active.
 
@@ -41,7 +41,8 @@ So the condition follows the same registration and version-check pipeline as the
 
 - Register the integration first in bootstrap code.
 - Use the same mod ID in your condition JSON.
-- Keep this feature scoped to `1.21.1`; the older Forge line does not expose `MyoModCondition`.
+- Use `myotus:mod_condition` as the condition type.
+- The Forge `1.20.1` line exposes the same JSON contract through an `IConditionSerializer`.
 
 ## Related pages
 

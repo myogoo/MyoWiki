@@ -12,6 +12,8 @@ sidebar:
 - Forge `47.4.17`
 - Java `17`
 - Applied Energistics 2 `15.4.10`
+- AE2WTLib compatibility target `15.3.3-forge`
+- Current local Myotus version `15.0.7`
 
 ## Build profile
 
@@ -29,14 +31,17 @@ The `1.20.1` line is a classic ForgeGradle project using:
 - optional mod registration and runtime checks
 - `/myotus mods` integration inspection command
 - client config entries for active-tab sorting and side-panel open behavior
+- config-tab visibility predicates
+- Forge `MyoModCondition`
+- terminal upgrade cards and terminal-scoped persistent storage
+- AE2WTLib `AddTerminalEvent` compatibility facade
 
 ## What it does not have
 
 Compared to `1.21.1`, this line does **not** expose:
 
-- terminal upgrade cards
-- player-persistent terminal upgrade storage
-- the newer fluent public API helpers
+- upstream AE2WTLib `api` module ownership
+- NeoForge condition codecs
 - the Maven publishing setup present in the NeoForge line
 
 ## When to prefer it

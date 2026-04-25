@@ -32,12 +32,15 @@ The Myotus public surface centers on:
 - `MyotusAPI.isInitialized()`
 - `MyotusAPI.modRegistrar()`
 - `MyotusAPI.configRegistrar()`
+- `MyotusAPI.creativeTabRegistrar()`
 - `MyotusAPI.modIntegrationManager()`
 
 The fluent registration helpers live on the service interfaces instead:
 
 - `IMyotusAPI.registerLoadableMod(...)`
 - `IMyotusAPI.registerConfigTab(...)`
+- `IMyotusAPI.registerCreativeTabItem(...)`
+- `IMyotusAPI.registerCreativeTabStack(...)`
 - `IModRegistrar.registerLoadableMod(...)`
 - `IConfigRegistrar.registerTerminalConfigTab(...)`
 - `IConfigRegistrar.registerTerminalConfigTabs(...)`
@@ -70,7 +73,7 @@ Author Brigadier nodes with `@MyoCommand`, `@MyoExecute`, and `@MyoArgument` ins
 
 ### Terminal upgrade cards and storage
 
-On `1.21.1`, Myotus adds both the `ITerminalUpgradeCard` hook and the menu/storage layer behind it. See [Terminal Upgrade Cards](/myotus/1.21.1/developers/terminal-upgrade-cards/) and [Upgrade Storage](/myotus/1.21.1/developers/upgrade-storage/).
+Myotus adds both the `ITerminalUpgradeCard` hook and the menu/storage layer behind it. See [Terminal Upgrade Cards](/myotus/1.21.1/developers/terminal-upgrade-cards/) and [Upgrade Storage](/myotus/1.21.1/developers/upgrade-storage/).
 
 ## Example
 
@@ -87,22 +90,19 @@ if (MyotusAPI.modIntegrationManager().isLoaded("examplemod")) {
 
 ### 1.20.1
 
-- The API surface is smaller and less fluent.
-- `MyotusAPI.get()` is the main stable entry point.
-- Registrar interfaces expose the core `loadableMod()` and `terminalConfigTab()` methods.
-- `MyoConfigTab` does not expose per-host visibility rules.
-- There is no `MyoModCondition` or terminal upgrade API in that line.
+- Uses Forge `47.4.17`, Java `17`, and AE2 `15.4.10`.
+- `MyoModCondition` is a Forge condition with an `IConditionSerializer`.
+- Provides a Myotus-owned AE2WTLib `AddTerminalEvent` compatibility facade for AE2WTLib `15.3.3-forge`.
+- Exposes a Myotus networking facade that is not present in the inspected `1.21.1` API package.
 
 ### 1.21.1
 
-- Adds static convenience methods directly on `MyotusAPI`
-- Adds fluent aliases on `IMyotusAPI`, `IModRegistrar`, and `IConfigRegistrar`
-- Keeps `MyotusAPI.isInitialized()` alongside the other static accessors
-- Adds `MyoConfigTabContext`, `MyoConfigTabVisibility`, and `visibleWhen()`
-- Adds `MyoModCondition` for data conditions
-- Adds `ITerminalUpgradeCard`, `TerminalUpgradeHelper`, and persistent upgrade-slot infrastructure
+- Uses NeoForge `21.1.219`, Java `21`, and AE2 `19.2.17`.
+- Uses the upstream AE2WTLib `19.2.5` API instead of the 1.20 compatibility facade.
+- `MyoModCondition` is registered through the NeoForge condition codec path.
+- Publishing is set up for Maven/API-jar workflows.
 
-If you target both lines, code to the common behavior first, then branch only where `1.21.1` adds extra capabilities.
+If you target both lines, code to the shared Myotus API first, then branch only for loader-specific condition registration, networking availability, or AE2WTLib implementation differences.
 
 ## Recommended next pages
 

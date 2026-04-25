@@ -10,7 +10,7 @@ This page covers the **storage side** of terminal upgrade cards in `1.21.1`. The
 
 ## Scope
 
-Everything here is **`1.21.1`-only**. The Forge `1.20.1` line does not have upgrade slots, upgrade storage, or the related mixins.
+The same high-level model also exists in the Forge `1.20.1` line. The implementation details differ where Minecraft, Forge/NeoForge, and AE2WTLib APIs differ.
 
 ## Where the slots come from
 
@@ -40,8 +40,7 @@ On the server, the mixin creates:
 ```java
 new PlayerUpgradeContainer(
     serverPlayer,
-    TerminalUpgradeStorageKey.of(host),
-    TerminalUpgradeStorageKey.legacyKeysOf(host)
+    TerminalUpgradeStorageKey.of(host)
 )
 ```
 
@@ -80,15 +79,11 @@ For `ItemMenuHost` hosts, the key includes:
 
 The UUID is written into custom item data under `myotus_terminal_storage_uuid`. This is what keeps portable/item terminals from sharing one storage bucket.
 
-## Legacy migration behavior
+## AE2WTLib merge behavior
 
-`PlayerUpgradeContainer` migrates older storage layouts in this order:
+When AE2WTLib merges a wireless terminal into a Wireless Universal Terminal, Myotus keeps track of the original terminal item's storage data.
 
-1. existing new-format terminal key
-2. legacy per-item keys returned by `legacyKeysOf(host)`
-3. old shared `terminal_upgrades` data
-
-The last case means the historical shared payload is moved into the **first terminal opened after the update** and then removed from the legacy key.
+The AE2WTLib recipe mixin copies the relevant custom data into `myotus_merged_terminal_storage`, so selecting the merged terminal inside the universal terminal can still resolve to the original terminal-specific storage key.
 
 ## Lifecycle dispatch
 

@@ -45,7 +45,5 @@ If you later move to a custom domain, set `SITE_URL=https://your-domain.example`
 
 ## Source references
 
-- `1.20.1`: `/mnt/f/IntelliJ/MyoCertus/Myotus_1_20_1`
-- `1.21.1`: `/mnt/f/IntelliJ/MyoCertus/MyoCertus_1_21_1`
-
-The `1.21.1` source folder is named `MyoCertus_1_21_1`, but the contained mod ID and packages are `myotus`.
+- `1.20.1`: `/mnt/f/IntelliJ/Minecraft/Myotus/Myotus_1_20_1`
+- `1.21.1`: `/mnt/f/IntelliJ/Minecraft/Myotus/Myotus_1_21_1`

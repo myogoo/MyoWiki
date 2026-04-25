@@ -19,17 +19,16 @@ sidebar:
 The inspected local path is:
 
 ```text
-/mnt/f/IntelliJ/MyoCertus/MyoCertus_1_21_1
+/mnt/f/IntelliJ/Minecraft/Myotus/Myotus_1_21_1
 ```
 
-Even though the folder is named `MyoCertus_1_21_1`, the actual mod ID, packages, and published coordinates are `myotus`.
+The actual mod ID, packages, and published coordinates are `myotus`.
 
-## Major additions over 1.20.1
+## Main differences from 1.20.1
 
-- static convenience methods on `MyotusAPI`
-- fluent registrar aliases
-- `ITerminalUpgradeCard`
-- player-persistent terminal upgrade storage
+- NeoForge `21.1.219` and Java `21`
+- NeoForge condition codec registration
+- upstream AE2WTLib API module behavior
 - item registration for upgrade-card examples
 - Maven publishing configuration and local repository publishing support
 
