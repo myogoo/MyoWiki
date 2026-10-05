@@ -104,6 +104,7 @@ starlight-toc a { font-size: .8rem; border-radius: .4rem; }
 .hero .tagline { font-size: 1.075rem; line-height: 1.8; color: var(--pt-text-muted); max-width: 38rem; margin-top: 1.5rem; }
 .hero .actions { justify-content: flex-start; margin-top: .4rem; }
 .hero::before { content: 'MYOTUS / THE DEVELOPER WIKI'; display: block; color: var(--pt-primary); font: 600 .72rem var(--sl-font-mono); letter-spacing: .13em; margin-bottom: 1.8rem; }
+:root[lang='ko'] .hero::before { content: 'MYOTUS / 개발자 위키'; }
 .hero .sl-link-button { border-radius: 999px; min-height: 48px; font-size: .9rem; font-weight: 650; }
 .hero .sl-link-button.primary { background: var(--pt-primary); border-color: var(--pt-primary); color: var(--pt-on-primary); }
 [data-has-hero] .main-pane { max-width: 72rem; margin-inline: auto; width: 100%; }
@@ -155,6 +156,9 @@ starlight-toc a { font-size: .8rem; border-radius: .4rem; }
   :root:not([data-has-sidebar]) .header { gap: .5rem; }
 }
 @media (max-width: 35rem) {
+  :root:not([data-has-sidebar]) { --sl-nav-height: 7.5rem; }
+  :root:not([data-has-sidebar]) .header { display: grid; grid-template-columns: 1fr auto; }
+  :root:not([data-has-sidebar]) .header .right-group { grid-column: 1 / -1; justify-content: flex-end; }
   .start-paths { grid-template-columns: 1fr; }
   .start-path { padding: 1.5rem; }
   .brand-divider, .brand-label { display: none; }

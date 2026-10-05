@@ -1,7 +1,12 @@
 ---
 import { Icon } from '@astrojs/starlight/components';
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const entries = [
+const base = Astro.locals.starlightRoute.siteTitleHref.replace(/\/$/, '');
+const entries = Astro.locals.starlightRoute.locale === 'ko' ? [
+  { title: '터미널 확장', description: '설정 탭, 업그레이드 카드, 클라이언트 위젯.', code: 'terminalUpgrades()', anchor: 'terminal-upgrade-cards', icon: 'setting' as const },
+  { title: '선택적 모드 연동', description: '명시된 생명주기 규칙에 따라 활성 연동을 확인합니다.', code: 'integrations()', anchor: 'optional-integrations', icon: 'puzzle' as const },
+  { title: '경험치 처리', description: '경험치 포인트 계산, 시뮬레이션, 지불을 처리합니다.', code: 'experience()', anchor: 'experience-api', icon: 'star' as const },
+  { title: '공용 개발 기능', description: '크리에이티브 탭, 명령어, 레시피 어댑터.', code: 'creativeTabs()', anchor: 'shared-creative-tab', icon: 'document' as const },
+] : [
   { title: 'Terminal extensions', description: 'Config tabs, upgrade cards, and client widgets.', code: 'terminalUpgrades()', anchor: 'terminal-upgrade-cards', icon: 'setting' as const },
   { title: 'Optional integrations', description: 'Discover active integrations with explicit lifecycle rules.', code: 'integrations()', anchor: 'optional-integrations', icon: 'puzzle' as const },
   { title: 'Experience operations', description: 'Calculate, simulate, and pay in raw XP points.', code: 'experience()', anchor: 'experience-api', icon: 'star' as const },

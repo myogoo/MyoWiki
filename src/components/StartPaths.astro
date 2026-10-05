@@ -1,7 +1,10 @@
 ---
 import { Icon } from '@astrojs/starlight/components';
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const paths = [
+const base = Astro.locals.starlightRoute.siteTitleHref.replace(/\/$/, '');
+const paths = Astro.locals.starlightRoute.locale === 'ko' ? [
+  { number: '01', title: 'Myotus 사용하기', text: '게임에 맞는 버전을 설치하고 터미널의 기능을 알아보세요.', href: 'installation', icon: 'download' as const, label: '설치 가이드' },
+  { number: '02', title: '애드온 만들기', text: '의존성을 설정하고 공용 크리에이티브 탭에 첫 아이템을 추가해 보세요.', href: 'quickstart', icon: 'puzzle' as const, label: '개발자 빠른 시작' },
+] : [
   { number: '01', title: 'Play with Myotus', text: 'Find the right version, install the library, and get to know your terminal.', href: 'installation', icon: 'download' as const, label: 'Installation guide' },
   { number: '02', title: 'Build an addon', text: 'Set up your dependency and make your first contribution to the shared creative tab.', href: 'quickstart', icon: 'puzzle' as const, label: 'Developer quickstart' },
 ];

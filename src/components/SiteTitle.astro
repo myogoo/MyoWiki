@@ -1,9 +1,11 @@
 ---
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { locale, siteTitleHref } = Astro.locals.starlightRoute;
+const korean = locale === 'ko';
 ---
-<a class="myotus-brand" href={`${base}/`} aria-label="Myotus documentation home">
+<a class="myotus-brand" href={siteTitleHref} aria-label={korean ? 'Myotus 문서 홈' : 'Myotus documentation home'}>
   <span class="brand-icon"><img src={`${base}/favicon.png`} width="28" height="28" alt="" /></span>
   <span>Myotus</span>
   <span class="brand-divider" aria-hidden="true">/</span>
-  <span class="brand-label">docs</span>
+  <span class="brand-label">{korean ? '문서' : 'docs'}</span>
 </a>

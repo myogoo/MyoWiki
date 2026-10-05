@@ -1,0 +1,40 @@
+---
+title: 작은 라이브러리로 더 편리한 터미널을.
+description: Myotus 한국어 위키. Applied Energistics 2 확장을 위한 설치 가이드와 소스 기반 API 문서입니다.
+template: splash
+hero:
+  title: 내 터미널을<br />조금 더 편리하게.
+  tagline: Myotus는 AE2 애드온을 위한 공용 라이브러리입니다. 게임에 맞는 버전을 찾고, API를 알아보고, 함께 쓰는 기반 위에서 개발을 시작하세요.
+  actions:
+    - text: 개발 시작하기
+      link: /ko/quickstart/
+      icon: right-arrow
+      variant: primary
+    - text: API 살펴보기
+      link: /ko/api/
+      variant: minimal
+---
+
+import StartPaths from '../../../components/StartPaths.astro';
+import LibraryMap from '../../../components/LibraryMap.astro';
+
+<div className="version-ribbon" aria-label="문서에서 다루는 Minecraft 버전">
+  <span className="ribbon-label">APPLIED ENERGISTICS 2를 위한 라이브러리</span>
+  <a href="/ko/versions/#minecraft-1201">1.20.1 <span>Forge</span></a>
+  <a href="/ko/versions/#minecraft-1211">1.21.1 <span>NeoForge</span></a>
+  <a href="/ko/versions/#minecraft-2612">26.1.2 <span>NeoForge</span></a>
+</div>
+
+## 어디서부터 시작할까요?
+
+<StartPaths />
+
+## 하나의 라이브러리, 함께 쓰는 여러 기능.
+
+<LibraryMap />
+
+<div className="source-note">
+  <span className="source-dot" aria-hidden="true"></span>
+  <p>소스와 연결된 문서, 버전별로 명시된 API 계약.<br />
+  로더 간에 코드를 공유하기 전에 <a href="/ko/about/">문서의 적용 범위</a>를 확인하세요.</p>
+</div>

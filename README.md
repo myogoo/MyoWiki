@@ -29,6 +29,7 @@ Search is generated at build time. Test search with `npm run preview`, not only 
 ## Content
 
 - Edit Markdown/MDX in `src/content/docs/`.
+- English pages stay at `/`; Korean translations live in `src/content/docs/ko/` and are served at `/ko/`. Keep matching filenames so the language selector opens the equivalent page.
 - Add navigation entries in `astro.config.mjs`.
 - JRip colors, geometry, and responsive adjustments are in `src/styles/theme.css`.
 - The site is served from the domain root; internal links use root-relative paths.
