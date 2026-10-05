@@ -1,39 +1,24 @@
-import { defineConfig } from '@playwright/test';
-import { withBasePath } from './tests/base-path';
-
-const port = 4323;
-const host = '127.0.0.1';
-const origin = `http://${host}:${port}`;
-const baseURL = new URL(withBasePath('/'), `${origin}/`).toString();
-const webServerCommand =
-  process.env.PLAYWRIGHT_WEB_SERVER_COMMAND ??
-  `npm run dev -- --host ${host} --port ${port}`;
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  timeout: 30_000,
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
-  expect: {
-    timeout: 5_000,
-  },
-  reporter: process.env.CI
-    ? [['list'], ['html', { open: 'never' }]]
-    : [['list']],
+  workers: 2,
+  reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    baseURL,
-    trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
-  },
-  webServer: {
-    command: webServerCommand,
-    url: baseURL,
-    reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
+    baseURL: process.env.SITE_URL || 'http://127.0.0.1:4322',
+    trace: 'retain-on-failure',
+    colorScheme: 'light',
   },
   projects: [
-    {
-      name: 'chromium',
-    },
+    { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 1000 } } },
+    { name: 'mobile', use: { ...devices['Pixel 7'] } },
   ],
+  webServer: process.env.SITE_URL ? undefined : {
+    command: 'npm run preview -- --port 4322',
+    url: 'http://127.0.0.1:4322/',
+    reuseExistingServer: false,
+  },
 });

@@ -1,119 +1,48 @@
-import { readFileSync } from 'node:fs';
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import { buildSidebar, buildVersionRootRedirects } from './src/config/projects.mjs';
-
-function normalizeBase(input) {
-  if (!input || input === '/') {
-    return '/';
-  }
-
-  return `/${input.replace(/^\/+|\/+$/g, '')}`;
-}
-
-function normalizeSite(input) {
-  return input.replace(/\/$/, '');
-}
-
-function getGitHubRepositoryContext() {
-  const repository = process.env.GITHUB_REPOSITORY ?? '';
-  const [repositoryOwner, repositoryName] = repository.split('/');
-
-  return {
-    owner: process.env.GITHUB_REPOSITORY_OWNER ?? repositoryOwner,
-    repo: repositoryName,
-  };
-}
-
-function getDefaultSite(owner) {
-  return owner ? `https://${owner}.github.io` : 'https://myogoo.github.io';
-}
-
-function getConfiguredSite() {
-  const explicitSite = process.env.SITE_URL?.trim();
-  if (explicitSite) {
-    return normalizeSite(explicitSite);
-  }
-
-  try {
-    const configuredDomain = readFileSync(new URL('./public/CNAME', import.meta.url), 'utf8')
-      .split(/\r?\n/)
-      .map((line) => line.trim())
-      .find((line) => line && !line.startsWith('#'));
-
-    if (configuredDomain) {
-      const normalizedDomain = configuredDomain.match(/^https?:\/\//i)
-        ? configuredDomain
-        : `https://${configuredDomain}`;
-
-      return normalizeSite(normalizedDomain);
-    }
-  } catch {
-    // No custom domain file is configured.
-  }
-
-  return '';
-}
-
-function getRepositoryBase(owner, repo) {
-  if (!owner || !repo) {
-    return '/';
-  }
-
-  return repo.toLowerCase() === `${owner}.github.io`.toLowerCase() ? '/' : `/${repo}`;
-}
-
-function getInferredBase(owner, repo, site) {
-  try {
-    const parsedSite = new URL(site);
-    const siteBase = normalizeBase(parsedSite.pathname);
-
-    if (siteBase !== '/') {
-      return siteBase;
-    }
-
-    const projectPagesHost = (owner ? `${owner}.github.io` : 'myogoo.github.io').toLowerCase();
-    if (parsedSite.hostname.toLowerCase() !== projectPagesHost) {
-      return '/';
-    }
-  } catch {
-    return '/';
-  }
-
-  return getRepositoryBase(owner, repo);
-}
-
-const { owner, repo } = getGitHubRepositoryContext();
-const site = getConfiguredSite() || getDefaultSite(owner);
-const base = normalizeBase(process.env.BASE_PATH ?? getInferredBase(owner, repo, site));
 
 export default defineConfig({
-  site,
-  base,
-  redirects: buildVersionRootRedirects(),
+  site: 'https://wiki.myogoo.me',
+  base: '/',
+  trailingSlash: 'always',
   integrations: [
     starlight({
-      title: 'MyoWiki',
-      description: 'Documentation for Myogoo projects and versioned integrations.',
-      tagline: 'Choose a project and version for Myogoo docs.',
-      logo: {
-        src: './src/assets/myotus.pn',
-        alt: 'Myotus logo',
-      },
-      favicon: '/favicon.svg',
-      social: [
-        { icon: 'github', label: 'GitHub', href: 'https://github.com/myogoo' },
+      title: 'Myotus',
+      description: 'The Myotus developer wiki. Extend Applied Energistics 2 terminals with shared APIs, configuration tabs, and upgrade cards.',
+      favicon: '/favicon.png',
+      social: [{ icon: 'github', label: 'Myotus on GitHub', href: 'https://github.com/mc-myo-s-mod/Myotus' }],
+      editLink: { baseUrl: 'https://github.com/myogoo/MyoWiki/edit/main/' },
+      customCss: [
+        '@fontsource-variable/manrope',
+        '@fontsource-variable/jetbrains-mono',
+        './src/styles/theme.css',
       ],
-      customCss: ['/src/styles/custom.css'],
-      lastUpdated: true,
       components: {
-        Header: './src/components/starlight/Header.astro',
-        Pagination: './src/components/starlight/Pagination.astro',
-        Sidebar: './src/components/starlight/Sidebar.astro',
-        SiteTitle: './src/components/starlight/SiteTitle.astro',
-        MobileMenuFooter: './src/components/starlight/MobileMenuFooter.astro',
+        SiteTitle: './src/components/SiteTitle.astro',
+        MarkdownContent: './src/components/MarkdownContent.astro',
       },
-      sidebar: buildSidebar(),
+      sidebar: [
+        { label: 'Start here', items: [
+          { label: 'Overview', slug: '' },
+          { label: 'Install Myotus', slug: 'installation' },
+          { label: 'Versions & downloads', slug: 'versions' },
+          { label: 'Addon quickstart', slug: 'quickstart' },
+        ] },
+        { label: 'Build with Myotus', items: [
+          { label: 'API reference', slug: 'api' },
+          { label: 'Architecture & lifecycle', slug: 'architecture' },
+          { label: 'Build & verification', slug: 'workflows' },
+        ] },
+        { label: 'In the game', items: [
+          { label: 'Terminal settings', slug: 'terminal-settings' },
+          { label: 'Items & materials', slug: 'items' },
+        ] },
+        { label: 'Project', items: [
+          { label: 'About these docs', slug: 'about' },
+          { label: 'Report an issue ↗', link: 'https://github.com/mc-myo-s-mod/Myotus/issues' },
+        ] },
+      ],
+      tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 3 },
     }),
   ],
 });

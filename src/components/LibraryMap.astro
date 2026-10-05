@@ -1,0 +1,18 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const entries = [
+  { title: 'Terminal extensions', description: 'Config tabs, upgrade cards, and client widgets.', code: 'terminalUpgrades()', anchor: 'terminal-upgrade-cards', icon: 'setting' as const },
+  { title: 'Optional integrations', description: 'Discover active integrations with explicit lifecycle rules.', code: 'integrations()', anchor: 'optional-integrations', icon: 'puzzle' as const },
+  { title: 'Experience operations', description: 'Calculate, simulate, and pay in raw XP points.', code: 'experience()', anchor: 'experience-api', icon: 'star' as const },
+  { title: 'Shared building blocks', description: 'Creative tabs, commands, and recipe adapters.', code: 'creativeTabs()', anchor: 'shared-creative-tab', icon: 'document' as const },
+];
+---
+<div class="library-map">
+  {entries.map(entry => <a href={`${base}/api/#${entry.anchor}`} class="library-entry">
+    <span class="entry-icon"><Icon name={entry.icon} size="22" /></span>
+    <div><h3>{entry.title}</h3><p>{entry.description}</p></div>
+    <code>{entry.code}</code>
+    <Icon name="right-arrow" size="18" />
+  </a>)}
+</div>

@@ -1,49 +1,43 @@
 # Myotus Wiki
 
-Versioned documentation site for Myotus built with Astro Starlight.
+An Astro + Starlight documentation site with a JRip-derived light/dark theme.
+
+**Site:** https://wiki.myogoo.me/
+
+**Deployment repository:** https://github.com/myogoo/MyoWiki
 
 ## Local development
 
-```bash
-npm install
+Use Node.js 24 and npm.
+
+```sh
+npm ci
 npm run dev
 ```
 
-## Production build
+Open the local URL printed by Astro at `/`.
 
-```bash
+```sh
+npm run check
 npm run build
+npx playwright install chromium
+npm test
 ```
 
-For a project Pages site, you can still build against an explicit repository path locally:
+Search is generated at build time. Test search with `npm run preview`, not only the development server. Browser tests build on the production output and start their own preview server.
 
-```bash
-SITE_URL=https://your-user.github.io BASE_PATH=/your-repo npm run build
-```
+## Content
 
-In GitHub Actions, `astro.config.mjs` automatically infers:
+- Edit Markdown/MDX in `src/content/docs/`.
+- Add navigation entries in `astro.config.mjs`.
+- JRip colors, geometry, and responsive adjustments are in `src/styles/theme.css`.
+- The site is served from the domain root; internal links use root-relative paths.
+- Do not copy uncommitted Myotus API changes into these docs as stable contracts. The initial source snapshot is `e7cfa3aaed345a351ab5d468f7d5f0f8b0e40b51`; update source references and the scope notice together when migrating to a newer revision.
 
-- `site` from `GITHUB_REPOSITORY_OWNER`
-- `base` from `GITHUB_REPOSITORY`
-
-That means a repository like `myogoo/MyoWiki` builds to `https://myogoo.github.io/MyoWiki/` without extra workflow-specific config.
-
-Local development uses `/` by default, so the site opens directly at the dev server root unless you explicitly set `BASE_PATH`.
+The source documents remain in the mod repository; this site maintains a reviewed copy. It is not automatically synchronized with local worktrees.
 
 ## GitHub Pages
 
-The repository already includes a deployment workflow at `.github/workflows/deploy.yml`.
+In repository Settings > Pages, choose **GitHub Actions** as the source and set the custom domain to `wiki.myogoo.me`. The deployment workflow checks types, builds the static site, runs browser checks, uploads `dist`, and deploys pushes to `main`. Pull requests run the same validation without deploying. No external hosting secret is needed.
 
-To publish on GitHub Pages:
-
-1. Push this project to GitHub on the `main` branch.
-2. In GitHub, open `Settings > Pages`.
-3. Set `Source` to `GitHub Actions`.
-4. Push to `main` again, or run the workflow manually from the `Actions` tab.
-
-If you later move to a custom domain, set `SITE_URL=https://your-domain.example` and remove `BASE_PATH`. Add `public/CNAME` if you want GitHub Pages to publish that domain automatically.
-
-## Source references
-
-- `1.20.1`: `/mnt/f/IntelliJ/Minecraft/Myotus/Myotus_1_20_1`
-- `1.21.1`: `/mnt/f/IntelliJ/Minecraft/Myotus/Myotus_1_21_1`
+See [NOTICE.md](NOTICE.md) for content, design, and font attribution.

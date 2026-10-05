@@ -1,0 +1,11 @@
+---
+import DefaultContent from '@astrojs/starlight/components/MarkdownContent.astro';
+---
+<DefaultContent><slot /></DefaultContent>
+
+<script>
+  // Starlight tables can scroll on narrow screens. Allow keyboard users to reach them.
+  document.querySelectorAll<HTMLTableElement>('.sl-markdown-content table').forEach(table => {
+    table.tabIndex = 0;
+  });
+</script>

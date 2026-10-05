@@ -1,0 +1,16 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const paths = [
+  { number: '01', title: 'Play with Myotus', text: 'Find the right version, install the library, and get to know your terminal.', href: 'installation', icon: 'download' as const, label: 'Installation guide' },
+  { number: '02', title: 'Build an addon', text: 'Set up your dependency and make your first contribution to the shared creative tab.', href: 'quickstart', icon: 'puzzle' as const, label: 'Developer quickstart' },
+];
+---
+<div class="start-paths">
+  {paths.map(path => <a class="start-path" href={`${base}/${path.href}/`}>
+    <div class="path-top"><Icon name={path.icon} size="24" /><span>{path.number}</span></div>
+    <h3>{path.title}</h3>
+    <p>{path.text}</p>
+    <span class="path-link">{path.label}<Icon name="right-arrow" size="18" /></span>
+  </a>)}
+</div>

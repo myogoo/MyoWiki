@@ -1,24 +1,40 @@
 ---
-title: MyoWiki
-description: Choose a project and version before opening the docs.
+title: Small library. More capable terminals.
+description: The Myotus wiki. Installation guides and source-linked APIs for extending Applied Energistics 2.
 template: splash
 hero:
-  title: Choose a project
-  tagline: Open the project first, then select the version you need.
-  image:
-    file: ../../assets/myotus.png
-    alt: MyoWiki mark
+  title: Your terminal.<br />A little more capable.
+  tagline: Myotus is the shared library behind your AE2 addons. Find your version, understand the APIs, and build on a common foundation.
   actions:
-    - text: View Projects
-      link: "#available-wikis"
+    - text: Start building
+      link: /quickstart/
       icon: right-arrow
       variant: primary
-sidebar:
-  hidden: true
+    - text: Explore the API
+      link: /api/
+      variant: minimal
 ---
 
-import ProjectDirectory from '../../components/home/ProjectDirectory.astro';
+import StartPaths from '../../components/StartPaths.astro';
+import LibraryMap from '../../components/LibraryMap.astro';
 
-MyoWiki organizes the docs by project first and version second.
+<div className="version-ribbon" aria-label="Documented Minecraft versions">
+  <span className="ribbon-label">MADE FOR APPLIED ENERGISTICS 2</span>
+  <a href="/versions/#minecraft-1201">1.20.1 <span>Forge</span></a>
+  <a href="/versions/#minecraft-1211">1.21.1 <span>NeoForge</span></a>
+  <a href="/versions/#minecraft-2612">26.1.2 <span>NeoForge</span></a>
+</div>
 
-<ProjectDirectory />
+## Where would you like to start?
+
+<StartPaths />
+
+## One library, a few useful building blocks.
+
+<LibraryMap />
+
+<div className="source-note">
+  <span className="source-dot" aria-hidden="true"></span>
+  <p>Source-linked documentation. Version-specific contracts.<br />
+  <a href="/about/">Read the documentation scope</a> before sharing code across loaders.</p>
+</div>

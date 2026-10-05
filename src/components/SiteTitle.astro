@@ -1,0 +1,9 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<a class="myotus-brand" href={`${base}/`} aria-label="Myotus documentation home">
+  <span class="brand-icon"><img src={`${base}/favicon.png`} width="28" height="28" alt="" /></span>
+  <span>Myotus</span>
+  <span class="brand-divider" aria-hidden="true">/</span>
+  <span class="brand-label">docs</span>
+</a>
